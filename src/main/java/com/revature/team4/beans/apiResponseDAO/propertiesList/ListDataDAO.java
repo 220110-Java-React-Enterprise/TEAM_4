@@ -13,4 +13,11 @@ public class ListDataDAO {
     public void setBody(ListBodyDAO body) {
         this.body = body;
     }
+
+    @Override
+    public String toString() {
+        return "ListDataDAO{" +
+                "body=" + body +
+                '}';
+    }
 }

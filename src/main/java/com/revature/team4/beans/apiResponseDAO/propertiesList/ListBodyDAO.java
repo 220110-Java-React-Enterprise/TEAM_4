@@ -22,4 +22,12 @@ public class ListBodyDAO {
     public void setSearchResults(ListSearchResultsDAO searchResults) {
         this.searchResults = searchResults;
     }
+
+    @Override
+    public String toString() {
+        return "ListBodyDAO{" +
+                "header='" + header + '\'' +
+                ", searchResults=" + searchResults +
+                '}';
+    }
 }

@@ -1,18 +1,18 @@
 package com.revature.team4.beans.apiResponseDAO.propertiesList;
 
 public class ListResultDAO {
-    private Integer id;
+    private Long id;
     private String name;
     private Integer starRating;
 
     public ListResultDAO() {
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -30,5 +30,14 @@ public class ListResultDAO {
 
     public void setStarRating(Integer starRating) {
         this.starRating = starRating;
+    }
+
+    @Override
+    public String toString() {
+        return "ListResultDAO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", starRating=" + starRating +
+                '}';
     }
 }

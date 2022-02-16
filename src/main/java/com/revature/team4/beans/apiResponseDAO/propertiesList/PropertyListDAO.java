@@ -22,4 +22,12 @@ public class PropertyListDAO {
     public void setData(ListDataDAO data) {
         this.data = data;
     }
+
+    @Override
+    public String toString() {
+        return "PropertyListDAO{" +
+                "result='" + result + '\'' +
+                ", data=" + data +
+                '}';
+    }
 }

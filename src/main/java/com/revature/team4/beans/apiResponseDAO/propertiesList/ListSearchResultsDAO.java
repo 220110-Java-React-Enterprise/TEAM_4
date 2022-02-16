@@ -24,4 +24,12 @@ public class ListSearchResultsDAO {
     public void setResults(ArrayList<ListResultDAO> results) {
         this.results = results;
     }
+
+    @Override
+    public String toString() {
+        return "ListSearchResultsDAO{" +
+                "totalCount=" + totalCount +
+                ", results=" + results +
+                '}';
+    }
 }
