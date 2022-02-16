@@ -1,7 +1,7 @@
 package com.revature.team4.beans.apiResponseDAO.locations;
 
 public class LocationDAO {
-   public String term;
+    public String term;
     public Integer moresuggestions;
     public Object autoSuggestInstance = null;
     public String trackingID;
