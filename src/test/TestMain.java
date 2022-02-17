@@ -1,6 +1,7 @@
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.team4.beans.apiResponseDAO.propertiesList.PropertyListDAO;
+import com.revature.team4.beans.controllers.FindListingsController;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
@@ -32,6 +33,12 @@ public class TestMain {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        System.out.println("TestMain");
+
+
+        FindListingsController fl = new FindListingsController();
+        System.out.println(fl.findListings());
 
     }
 }
