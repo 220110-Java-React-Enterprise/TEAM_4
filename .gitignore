@@ -34,3 +34,5 @@ build/
 
 #Other
 *.properties
+application.properties
+api-key.properties

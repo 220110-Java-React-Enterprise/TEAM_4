@@ -30,4 +30,6 @@ public class PropertyListDAO {
                 ", data=" + data +
                 '}';
     }
+
+
 }
