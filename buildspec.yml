@@ -1,0 +1,25 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto11
+  pre_build:
+    commands:
+      - echo ======================================== PRE BUILD ========================================
+      - pwd
+      - ls -al
+      #change next line to our s3 bucket and properties files
+      #- aws s3 cp s3://kylebucketrevature/jdbc.properties src/main/resources/jdbc.properties
+      - ls -al
+      - ls -al src/main/resources/
+  build:
+    commands:
+      - mvn package
+  post_build:
+    commands:
+      - mv target/team4-0.1.war ROOT.war
+artifacts:
+  files:
+    - ROOT.war
+    - .ebextensions/**/*
