@@ -36,7 +36,6 @@ public class TestMain {
 
         System.out.println("TestMain");
 
-
         FindListingsController fl = new FindListingsController();
         System.out.println(fl.findListings());
 
