@@ -10,18 +10,22 @@ public class Listing {
     private Integer listingId;
 
     @Column
-    private String date;
+    private Long hotelId;
 
     @Column
-    private String location;
+    private String name;
+    @Column
+    private Integer starRating;
+
 
     public Listing() {
     }
 
-    public Listing(Integer listingId, String date, String location) {
+    public Listing(Integer listingId, Long hotelId, String name, Integer starRating) {
         this.listingId = listingId;
-        this.date = date;
-        this.location = location;
+        this.hotelId = hotelId;
+        this.name = name;
+        this.starRating = starRating;
     }
 
     public Integer getListingId() {
@@ -32,19 +36,27 @@ public class Listing {
         this.listingId = listingId;
     }
 
-    public String getDate() {
-        return date;
+    public Long getHotelId() {
+        return hotelId;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setHotelId(Long hotelId) {
+        this.hotelId = hotelId;
     }
 
-    public String getLocation() {
-        return location;
+    public String getName() {
+        return name;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getStarRating() {
+        return starRating;
+    }
+
+    public void setStarRating(Integer starRating) {
+        this.starRating = starRating;
     }
 }

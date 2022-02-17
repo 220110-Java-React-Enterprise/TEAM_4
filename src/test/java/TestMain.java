@@ -1,6 +1,6 @@
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.team4.beans.apiResponseDAO.propertiesList.PropertyListDAO;
+import com.revature.team4.beans.apiResponseDAO.propertiesList.*;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
@@ -28,8 +28,20 @@ public class TestMain {
 
             ObjectMapper mapper = new ObjectMapper();
             mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+
+//            System.out.println("parse =====================>" + propertyListDAO);
             PropertyListDAO propertyListDAO = mapper.readValue(jsonString, PropertyListDAO.class);
-            System.out.println(propertyListDAO);
+
+            System.out.println(propertyListDAO.getData().getBody().getSearchResults().getResults().get(0));
+            //          System.out.println(propertyListDAO.getData().getBody().getSearchResults().getTotalCount());
+
+//            System.out.println("parse One=====================>" + propertyListDAO);
+//            System.out.println("parse Two=====================>" + propertyListDAO.getData());
+//            System.out.println("parse Three=====================>" + propertyListDAO.getData().getBody());
+//            System.out.println("parse Four=====================>" + propertyListDAO.getData().getBody().getHeader());
+//            System.out.println("parse Five=====================>" + propertyListDAO.getData().getBody().getSearchResults());
+//            System.out.println("parse Six=====================>" + propertyListDAO.getData().getBody());
         } catch (IOException e) {
             e.printStackTrace();
         }
