@@ -19,7 +19,8 @@ import java.util.Properties;
 @RestController
 @RequestMapping("/find_listings")
 public class FindListingsController {
-@RequestMapping(method = RequestMethod.GET)
+
+    @RequestMapping(method = RequestMethod.GET)
     public ArrayList<ListResultDAO> findListings(){
     Properties props = new Properties();
     ClassLoader loader = Thread.currentThread().getContextClassLoader();

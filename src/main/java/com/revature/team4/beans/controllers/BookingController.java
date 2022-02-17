@@ -44,8 +44,8 @@ public class BookingController {
                     booking.setName(lRD.get(i).getName());
                     booking.setStarRating(lRD.get(i).getStarRating());
                     user.addBooking(booking);
-                    userRepo.save(user);
                     bookingRepo.save(booking);
+                    userRepo.save(user);
                 }
             }
 
