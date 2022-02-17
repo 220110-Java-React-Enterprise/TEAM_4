@@ -5,21 +5,21 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.revature.team4.beans.apiResponseDAO.propertiesList.ListResultDAO;
 import com.revature.team4.exceptions.CustomException;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.team4.beans.apiResponseDAO.propertiesList.PropertyListDAO;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
-
 import java.util.ArrayList;
-import java.util.List;
+
 
 @RestController
 @RequestMapping("/find_listings")
 public class FindListingsController {
-
-    public List<ListResultDAO> findListings() {
+@RequestMapping(method = RequestMethod.GET)
+    public ArrayList<ListResultDAO> findListings() {
         try{
             OkHttpClient client = new OkHttpClient();
 
@@ -35,8 +35,10 @@ public class FindListingsController {
             mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             PropertyListDAO propertyListDAO = mapper.readValue(jsonString, PropertyListDAO.class);
 
-            //System.out.println(propertyListDAO.getData().getBody().getSearchResults().getResults());
             ArrayList<ListResultDAO> listings = new ArrayList<>();
+            listings = propertyListDAO.getData().getBody().getSearchResults().getResults();
+//            System.out.println(listings);
+            return listings;
         } catch (JsonMappingException e) {
             e.printStackTrace();
         } catch (JsonProcessingException e) {
