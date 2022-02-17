@@ -20,7 +20,7 @@ import java.util.Properties;
 @RequestMapping("/find_listings")
 public class FindListingsController {
 @RequestMapping(method = RequestMethod.GET)
-    public ArrayList<ListResultDAO> findListings() {
+    public ArrayList<ListResultDAO> findListings(){
     Properties props = new Properties();
     ClassLoader loader = Thread.currentThread().getContextClassLoader();
     InputStream input = loader.getResourceAsStream("api-key.properties");
