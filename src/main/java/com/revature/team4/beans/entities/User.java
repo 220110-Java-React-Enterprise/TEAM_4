@@ -1,6 +1,8 @@
 package com.revature.team4.beans.entities;
 
 import javax.persistence.*;
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity
 public class User {
@@ -17,6 +19,27 @@ public class User {
 
     @Column
     private String email;
+
+    @Column
+    @OneToMany
+    private List<Booking> bookings = new LinkedList<>();
+
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
+    }
+
+    public void addBooking(Booking booking){
+        bookings.add(booking);
+    }
+
+    public void removeBooking(Booking booking){
+        bookings.remove(booking);
+    }
+
 
     public User() {
     }

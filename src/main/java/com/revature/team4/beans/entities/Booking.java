@@ -3,11 +3,11 @@ package com.revature.team4.beans.entities;
 import javax.persistence.*;
 
 @Entity
-public class Listing {
+public class Booking {
     @Id
-    @Column(name = "listing_id")
+    @Column(name = "booking_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer listingId;
+    private Integer bookingId;
 
     @Column
     private Long hotelId;
@@ -18,22 +18,23 @@ public class Listing {
     private Integer starRating;
 
 
-    public Listing() {
+
+    public Booking() {
     }
 
-    public Listing(Integer listingId, Long hotelId, String name, Integer starRating) {
-        this.listingId = listingId;
+    public Booking(Integer bookingId, Long hotelId, String name, Integer starRating) {
+        this.bookingId = bookingId;
         this.hotelId = hotelId;
         this.name = name;
         this.starRating = starRating;
     }
 
-    public Integer getListingId() {
-        return listingId;
+    public Integer getBookingId() {
+        return bookingId;
     }
 
-    public void setListingId(Integer listingId) {
-        this.listingId = listingId;
+    public void setBookingId(Integer bookingId) {
+        this.bookingId = bookingId;
     }
 
     public Long getHotelId() {
