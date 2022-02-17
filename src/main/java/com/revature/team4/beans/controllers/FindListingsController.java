@@ -39,7 +39,7 @@ public class FindListingsController {
             mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             PropertyListDAO propertyListDAO = mapper.readValue(jsonString, PropertyListDAO.class);
 
-            ArrayList<ListResultDAO> listings = new ArrayList<>();
+            ArrayList<ListResultDAO> listings = new ArrayList<ListResultDAO>();
             listings = propertyListDAO.getData().getBody().getSearchResults().getResults();
 //            System.out.println(listings);
             return listings;
