@@ -17,7 +17,7 @@ public class Team4Application {
 		System.out.println("Team4");
 		SpringApplication.run(Team4Application.class, args);
 		FindListingsController fl = new FindListingsController();
-		System.out.println(fl.findListings());
+		//System.out.println(fl.findListings());
 	}
 
 }

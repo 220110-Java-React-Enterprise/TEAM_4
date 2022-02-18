@@ -31,7 +31,7 @@ public class BookingController {
     public void newBooking(@RequestBody Booking booking, @PathVariable Integer userId) throws Exception {
         //User user = userRepo.getById(userId);
         Optional<User> optionalUser = userRepo.findById(userId);
-        List<ListResultDAO> lRD = findListingsController.findListings();
+        List<ListResultDAO> lRD = findListingsController.findListings("1506246");
 
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
