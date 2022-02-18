@@ -6,15 +6,7 @@ phases:
       java: corretto8
   pre_build:
     commands:
-<<<<<<< HEAD
-      - echo ======================================= PRE BUILD ========================================
-      - pwd
-      - ls -al
-      - aws s3 cp s3://team4-properties-bucket/application.properties src/main/resources/application.properties
-      - aws s3 cp s3://team4-properties-bucket/api-key.properties src/main/resources/api-key.properties
-      - ls -al
-      - ls -al src/main/resources/
-=======
+
 #      - echo ======================================= PRE BUILD ========================================
 #      - pwd
 #      - ls -al
@@ -22,7 +14,7 @@ phases:
       - aws s3 cp s3://p2propbucket/api-key.properties src/main/resources/api-key.properties
 #      - ls -al
 #      - ls -al src/main/resources/
->>>>>>> 1f14adf621bd4ff2757258448346ce6a8737ad28
+
   build:
     commands:
 #      - mvn package
