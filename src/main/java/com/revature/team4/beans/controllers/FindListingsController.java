@@ -53,8 +53,6 @@ public class FindListingsController {
         }
     return null;
     }
-
-
 }
 
 
