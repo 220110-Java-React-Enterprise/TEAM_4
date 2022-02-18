@@ -117,4 +117,20 @@ public class LocationEntityDAO {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "LocationEntityDAO{" +
+                "geoId='" + geoId + '\'' +
+                ", destinationId='" + destinationId + '\'' +
+                ", landmarkCityDestinationId=" + landmarkCityDestinationId +
+                ", type='" + type + '\'' +
+                ", redirectPage='" + redirectPage + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                ", searchDetail=" + searchDetail +
+                ", caption='" + caption + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

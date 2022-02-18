@@ -1,5 +1,7 @@
 package com.revature.team4.beans.apiResponseDAO.locations;
 
+import java.util.Arrays;
+
 public class LocationDAO {
     public String term;
     public Integer moresuggestions;
@@ -82,5 +84,18 @@ public class LocationDAO {
 
     public void setGeocodeFallback(boolean geocodeFallback) {
         this.geocodeFallback = geocodeFallback;
+    }
+
+    @Override
+    public String toString() {
+        return "LocationDAO{" +
+                "term='" + term + '\'' +
+                ", moresuggestions=" + moresuggestions +
+                ", autoSuggestInstance=" + autoSuggestInstance +
+                ", trackingID='" + trackingID + '\'' +
+                ", misspellingfallback=" + misspellingfallback +
+                ", suggestions=" + Arrays.toString(suggestions) +
+                ", geocodeFallback=" + geocodeFallback +
+                '}';
     }
 }

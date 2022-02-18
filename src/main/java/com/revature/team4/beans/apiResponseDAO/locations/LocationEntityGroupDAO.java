@@ -30,4 +30,12 @@ public class LocationEntityGroupDAO {
     public void setEntities(List<LocationEntityDAO> entities) {
         this.entities = entities;
     }
+
+    @Override
+    public String toString() {
+        return "LocationEntityGroupDAO{" +
+                "group='" + group + '\'' +
+                ", entities=" + entities +
+                '}';
+    }
 }

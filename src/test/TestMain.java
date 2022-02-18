@@ -16,7 +16,7 @@ public class TestMain {
                 .url("https://hotels4.p.rapidapi.com/properties/list?destinationId=1506246&pageNumber=1&pageSize=25&checkIn=2020-01-08&checkOut=2020-01-15&adults1=1&sortOrder=PRICE&locale=en_US&currency=USD")
                 .get()
                 .addHeader("x-rapidapi-host", "hotels4.p.rapidapi.com")
-                .addHeader("x-rapidapi-key", "7462d63c23msh8d9380ad353e614p1c8193jsn011e003d20c1")
+                .addHeader("x-rapidapi-key", "")
                 .build();
 
         try {
