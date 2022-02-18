@@ -20,5 +20,7 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void newUser(@RequestBody User user) { userRepo.save(user); }
+    public void newUser(@RequestBody User user) {
+        userRepo.save(user);
+    }
 }
