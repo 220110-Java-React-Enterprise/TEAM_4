@@ -53,6 +53,8 @@ public class LocationController {
                     .addHeader("x-rapidapi-key", properties.getProperty("api-key"))
                     .build();
 
+            System.out.println(properties.getProperty("api-key"));
+
             Response response = client.newCall(request).execute();
 
             String jsonString = response.body().string();
