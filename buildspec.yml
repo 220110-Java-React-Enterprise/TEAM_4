@@ -14,7 +14,8 @@ phases:
 #      - ls -al src/main/resources/
   build:
     commands:
-      - mvn package
+#      - mvn package
+      - mvn package -DskipTests
   post_build:
     commands:
       - mv target/devops-demo-0.1.war ROOT.war
