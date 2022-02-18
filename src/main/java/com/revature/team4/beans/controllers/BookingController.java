@@ -31,16 +31,12 @@ public class BookingController {
     public void newBooking(@RequestBody Booking booking, @PathVariable Integer userId) throws Exception {
         //User user = userRepo.getById(userId);
         Optional<User> optionalUser = userRepo.findById(userId);
-        List<ListResultDAO> lRD = findListingsController.findListings();
-        System.out.println(booking.getHotelId() + "1");
+        List<ListResultDAO> lRD = findListingsController.findListings("1506246");
+
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
-
             for(int i = 0; i < lRD.size(); i++){
-                System.out.println(booking.getHotelId() + "2");
                 if(booking.getHotelId().equals(lRD.get(i).getId())){
-
-                    System.out.println(booking.getHotelId() + "3");
                     booking.setName(lRD.get(i).getName());
                     booking.setStarRating(lRD.get(i).getStarRating());
                     user.addBooking(booking);
@@ -48,15 +44,8 @@ public class BookingController {
                     userRepo.save(user);
                 }
             }
-
         } else {
             throw new Exception("User not found...");
         }
-
-
-
-
-
     }
-
 }

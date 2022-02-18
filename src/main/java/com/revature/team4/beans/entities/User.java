@@ -11,14 +11,12 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
 
-    @Column
-    private String username;
+    @Column(unique = true)
+    private String email;
 
     @Column
     private String password;
 
-    @Column
-    private String email;
 
     @Column
     @OneToMany
@@ -44,12 +42,6 @@ public class User {
     public User() {
     }
 
-    public User(Integer userId, String username, String password, String email) {
-        this.userId = userId;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-    }
 
     public Integer getUserId() {
         return userId;
@@ -57,14 +49,6 @@ public class User {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getPassword() {
