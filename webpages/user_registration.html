@@ -6,21 +6,22 @@
     <body>
         <script type="text/javascript">
             async function postUser() {
-                let url = "http://localhost:8080/users";
+                let goodUrl = "http://localhost:8080/users";
                 let user = {
                     email: document.getElementById("email").value,
                     password: document.getElementById("password").value
                 }
-                let response = await fetch(url, {
+                let response = fetch(goodUrl, {
                     method: 'POST',
                     headers: {
-                        'Content-type': 'application/json;charset=utf-8'
+                        'Content-Type': 'application/json;charset=utf-8'
                     },
                     body: JSON.stringify(user)
-                })
+                });
+                
             }
         </script>
-        <form>
+        <form method="POST" action="http://localhost:8080/users">
             <input id="email" name="email" type="text"><br/>
             <input id="password" name="password" type="password"><br/>
             <button type="submit" value="submit">Submit</button>
