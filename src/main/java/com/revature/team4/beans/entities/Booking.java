@@ -11,13 +11,10 @@ public class Booking {
 
     @Column
     private Long hotelId;
-
     @Column
     private String name;
     @Column
     private Integer starRating;
-
-
 
     public Booking() {
     }
