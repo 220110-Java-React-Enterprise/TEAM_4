@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>User Registration</title>
+    </head>
+    <body>
+        <script type="text/javascript">
+            async function postUser() {
+                let url = "http://localhost:8080/users";
+                let user = {
+                    email: document.getElementById("email").value,
+                    password: document.getElementById("password").value
+                }
+                let response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-type': 'application/json;charset=utf-8'
+                    },
+                    body: JSON.stringify(user)
+                })
+            }
+        </script>
+        <form>
+            <input id="email" name="email" type="text"><br/>
+            <input id="password" name="password" type="password"><br/>
+            <button type="submit" value="submit">Submit</button>
+            <input id="post" name="post" type="button" onclick="postUser()" value="Post">
+        </form>
+    </body>
+</html>
