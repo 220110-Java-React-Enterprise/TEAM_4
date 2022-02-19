@@ -1,9 +1,15 @@
 package com.revature.team4.beans.apiResponseDAO.propertiesList;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.Map;
+
 public class ListResultDAO {
     private Long id;
     private String name;
     private Integer starRating;
+    private String currentPrice;
+    private Double exactCurrentPrice;
 
     public ListResultDAO() {
     }
@@ -32,12 +38,37 @@ public class ListResultDAO {
         this.starRating = starRating;
     }
 
+    public String getCurrentPrice() {
+        return currentPrice;
+    }
+
+    public void setCurrentPrice(String currentPrice) {
+        this.currentPrice = currentPrice;
+    }
+
+    public Double getExactCurrentPrice() {
+        return exactCurrentPrice;
+    }
+
+    public void setExactCurrentPrice(Double exactCurrentPrice) {
+        this.exactCurrentPrice = exactCurrentPrice;
+    }
+
     @Override
     public String toString() {
         return "ListResultDAO{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", starRating=" + starRating +
+                ", currentPrice='" + currentPrice + '\'' +
+                ", exactCurrentPrice=" + exactCurrentPrice +
                 '}';
+    }
+
+    @JsonProperty("ratePlan")
+    public void listPrice(Map<String, Object> ratePlan){
+        Map<String, Object> price = (Map<String, Object>) ratePlan.get("price");
+        this.currentPrice = (String) price.get("current");
+        this.exactCurrentPrice = (Double) price.get("exactCurrent");
     }
 }

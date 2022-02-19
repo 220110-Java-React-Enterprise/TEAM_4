@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>User Login</title>
+        
+    </head>
+    <body>
+        <script type="text/javascript">
+            async function loginFunction() {
+                let goodUrl = "http://localhost:8080/users";
+                let user = {
+                    email: document.getElementById("email").value,
+                    password: document.getElementById("password").value
+                }
+                let urlWithParam = goodUrl + "?email=" + user.email + "&password=" + user.password;
+                alert(urlWithParam);
+                let response = fetch(urlWithParam);
+                console.log(response);
+                console.log(response.body);
+                alert(response.body);
+                if (response.body) {
+                    alert("Login Good!");
+                } else {
+                    alert("Error: login credentials do not match any user.");
+                }
+            }
+        </script>
+        <form>
+            <input id="email" name="email" type="text"><br/>
+            <input id="password" name="password" type="password"><br/>
+            <input id="login" name="login" type="button" onclick="loginFunction()" value="Login">
+        </form>
+
+    </body>
+</html>
