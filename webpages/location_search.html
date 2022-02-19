@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Location Search</title>
+    </head>
+    <body>
+        <script type="text/javascript">
+            async function searchLocation() {
+                let url = "http://localhost:8080/locations/";
+                let query = document.getElementById("locationSearch").value;
+
+                let urlWithParam = url + query;
+                let response = await fetch(urlWithParam);
+                let text = await response.json();
+                //document.getElementById("resultsTable").innerHTML = document.getElementById("resultsTable").innerHTML.concat("<td>somename</td>");
+
+                if (text) {
+                    alert("Search Good!");
+                    await console.log(response);
+                    console.log(text);
+                    for (element of text) {
+                        console.log(element);
+                        document.getElementById("resultsTable").innerHTML =
+                        document.getElementById("resultsTable").innerHTML.concat(
+                            "<tr><td>" + element.type + "</td>" +
+                            "<td>" + element.name + "</td>" +
+                            "<td>" + element.caption + "</td></tr>"
+                        );
+                    }
+                } else {
+                    alert("Error: search failed.");
+                }
+            }
+        </script>
+        <form>
+            <input id="locationSearch" name="locationSearch" type="text">
+            <button id="search" name="search" onclick="search()">Search</button>
+            <input id="search" name="search" type="button" onclick="searchLocation()" value="Search">
+        </form>
+        <table id="resultsTable">
+            <tr>
+                <th>Type</th>
+                <th>Name</th>
+                <th>Caption</th>
+            </tr>
+            <tr></tr>
+        </table>
+    </body>
+</html>
