@@ -14,11 +14,7 @@
                 }
                 let urlWithParam = goodUrl + "?email=" + user.email + "&password=" + user.password;
                 let response = await fetch(urlWithParam);
-                console.log(urlWithParam);
                 let text = await response.text();
-                console.log(response);
-                //console.log(response.bodyUsed);
-                console.log(text);
                 if (text) {
                     alert("Login Good!");
                 } else {
