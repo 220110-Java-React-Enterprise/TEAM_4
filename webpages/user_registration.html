@@ -11,21 +11,19 @@
                     email: document.getElementById("email").value,
                     password: document.getElementById("password").value
                 }
-                let response = fetch(goodUrl, {
+                let response = await fetch(goodUrl, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json;charset=utf-8'
                     },
                     body: JSON.stringify(user)
                 });
-                
             }
         </script>
         <form method="POST" action="http://localhost:8080/users">
             <input id="email" name="email" type="text"><br/>
             <input id="password" name="password" type="password"><br/>
-            <button type="submit" value="submit">Submit</button>
-            <input id="post" name="post" type="button" onclick="postUser()" value="Post">
+            <input id="register" name="register" type="button" onclick="postUser()" value="Register">
         </form>
     </body>
 </html>
