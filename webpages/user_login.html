@@ -14,7 +14,7 @@
                 }
                 let urlWithParam = goodUrl + "?email=" + user.email + "&password=" + user.password;
                 alert(urlWithParam);
-                let response = fetch(urlWithParam);
+                let response = fetch(urlWithParam); //NOT FIXED
                 alert(response);
                 if (response) {
                     alert("Login Good!");
