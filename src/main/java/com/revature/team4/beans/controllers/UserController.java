@@ -23,20 +23,20 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public Integer login(@RequestParam String email, @RequestParam String password) {
+    public User login(@RequestParam String email, @RequestParam String password) {
         List<User> users = userRepo.findAll();
 
         for (int index = 0; index < users.size(); index++) {
             if (users.get(index).getEmail().equals(email)) {
                 if (users.get(index).getPassword().equals(password)) {
-                    return users.get(index).getUserId();
+                    return users.get(index);
                 } else {
-                    return 0;
+                    return null;
                 }
             }
         }
 
-        return 0;
+        return null;
     }
 
     @RequestMapping(method = RequestMethod.POST)

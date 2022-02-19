@@ -13,12 +13,13 @@
                     password: document.getElementById("password").value
                 }
                 let urlWithParam = goodUrl + "?email=" + user.email + "&password=" + user.password;
-                alert(urlWithParam);
-                let response = fetch(urlWithParam);
+                let response = await fetch(urlWithParam);
+                console.log(urlWithParam);
+                let text = await response.text();
                 console.log(response);
-                console.log(response.body);
-                alert(response.body);
-                if (response.body) {
+                //console.log(response.bodyUsed);
+                console.log(text);
+                if (text) {
                     alert("Login Good!");
                 } else {
                     alert("Error: login credentials do not match any user.");
