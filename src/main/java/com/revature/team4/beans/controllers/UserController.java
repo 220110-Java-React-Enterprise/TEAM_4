@@ -69,11 +69,18 @@ public class UserController {
     }
 
     //Method to check if an email is already being used in database and return User if so
-    public User isEmailUnused(String email) {
+    public User getUserByEmail(String email) {
         //Get all users in database
         List<User> users = userRepo.findAll();
 
-        //Placeholder for commit
+        //Search users for email; return user if found
+        for (User u : users) {
+            if (u.getEmail().equals(email)) {
+                return u;
+            }
+        }
+
+        //Return null if user with email not found
         return null;
     }
 
