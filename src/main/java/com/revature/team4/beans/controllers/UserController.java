@@ -3,6 +3,7 @@ package com.revature.team4.beans.controllers;
 import com.revature.team4.beans.entities.User;
 import com.revature.team4.beans.repositories.BookingRepo;
 import com.revature.team4.beans.repositories.UserRepo;
+import com.revature.team4.util.DataStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +31,7 @@ public class UserController {
         for (int index = 0; index < users.size(); index++) {
             if (users.get(index).getEmail().equals(email)) {
                 if (users.get(index).getPassword().equals(password)) {
+                    DataStore.setCurrentUser(users.get(index));
                     return users.get(index);
                 } else {
                     return null;
