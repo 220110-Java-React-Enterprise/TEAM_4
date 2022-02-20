@@ -18,8 +18,17 @@
                     },
                     body: JSON.stringify(user)
                 });
+                let text = await response.text();
+                console.log(text);
+                if (text) {
+                    alert('Registration good!');
+                    window.location.href = "user_login.html";
+                } else {
+                    alert("Error: could not create new user.")
+                }
             }
         </script>
+        <h1>User Registration</h1>
         <form method="POST" action="http://localhost:8080/users">
             <input id="email" name="email" type="text"><br/>
             <input id="password" name="password" type="password"><br/>

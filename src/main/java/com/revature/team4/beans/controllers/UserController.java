@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,8 +42,13 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void newUser(@RequestBody User user) {
-        userRepo.save(user);
+    public User newUser(@RequestBody User user) {
+        try {
+            return userRepo.save(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @RequestMapping(method = RequestMethod.PUT)
