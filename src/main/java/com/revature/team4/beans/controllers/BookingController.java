@@ -5,6 +5,7 @@ import com.revature.team4.beans.entities.Booking;
 import com.revature.team4.beans.entities.User;
 import com.revature.team4.beans.repositories.BookingRepo;
 import com.revature.team4.beans.repositories.UserRepo;
+import com.revature.team4.util.DataStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -31,8 +32,8 @@ public class BookingController {
     public void newBooking(@RequestBody Booking booking, @PathVariable Integer userId) throws Exception {
         //User user = userRepo.getById(userId);
         Optional<User> optionalUser = userRepo.findById(userId);
-        List<ListResultDAO> lRD = findListingsController.findListings("1506246");
-
+//        List<ListResultDAO> lRD = findListingsController.findListings("1506246");
+        List<ListResultDAO> lRD = DataStore.getCurrentListingsResults();
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             for(int i = 0; i < lRD.size(); i++){

@@ -11,6 +11,7 @@ import java.util.List;
 public class DataStore {
     private static User currentUser;
     private static List<LocationEntityDAO> currentLocationResults;
+    private static LocationEntityDAO currentLocation;
     private static List<ListResultDAO> currentListingsResults;
 
     public static User getCurrentUser() {
@@ -27,6 +28,14 @@ public class DataStore {
 
     public static void setCurrentLocationResults(List<LocationEntityDAO> currentLocationResults) {
         DataStore.currentLocationResults = currentLocationResults;
+    }
+
+    public static LocationEntityDAO getCurrentLocation() {
+        return currentLocation;
+    }
+
+    public static void setCurrentLocation(LocationEntityDAO currentLocation) {
+        DataStore.currentLocation = currentLocation;
     }
 
     public static List<ListResultDAO> getCurrentListingsResults() {

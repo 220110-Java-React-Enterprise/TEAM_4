@@ -1,6 +1,7 @@
 package com.revature.team4.beans.controllers;
 
 import com.revature.team4.beans.apiResponseDAO.propertiesList.ListResultDAO;
+import com.revature.team4.util.DataStore;
 import com.squareup.okhttp.Response;
 import org.springframework.web.bind.annotation.*;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -44,9 +45,12 @@ public class FindListingsController {
             mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             PropertyListDAO propertyListDAO = mapper.readValue(jsonString, PropertyListDAO.class);
 
-            ArrayList<ListResultDAO> listings = new ArrayList<ListResultDAO>();
+            ArrayList<ListResultDAO> listings;
             listings = propertyListDAO.getData().getBody().getSearchResults().getResults();
 //            System.out.println(listings);
+
+            //Set data store object to given listings and return
+            DataStore.setCurrentListingsResults(listings);
             return listings;
         } catch (IOException e) {
             e.printStackTrace();

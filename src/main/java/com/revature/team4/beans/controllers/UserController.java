@@ -8,9 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
+import java.util.Properties;
 
 @RestController
 @RequestMapping("/users")
@@ -63,5 +66,32 @@ public class UserController {
         Optional<User> optionalUser = userRepo.findById(user.getUserId());
         optionalUser.ifPresent(value -> bookingRepo.deleteAll(value.getBookings()));
         userRepo.delete(user);
+    }
+
+    //Method to check if an email is already being used in database and return User if so
+    public User isEmailUnused(String email) {
+        //Get all users in database
+        List<User> users = userRepo.findAll();
+
+        //Placeholder for commit
+        return null;
+    }
+
+    //Method to automatically generate admin account every time the application starts if it does not exist
+    public void createAdmin() {
+        //Load admin info from the properties file
+        Properties properties = new Properties();
+        ClassLoader loader = Thread.currentThread().getContextClassLoader();
+        InputStream input = loader.getResourceAsStream("admin.properties");
+
+        try {
+            properties.load(input);
+
+            //Create the user object holding admin info
+            User admin = new User(properties.getProperty("email"), properties.getProperty("password"));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
