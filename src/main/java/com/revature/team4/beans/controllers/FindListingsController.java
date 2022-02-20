@@ -17,11 +17,12 @@ import java.util.Properties;
 
 
 @RestController
-@RequestMapping("/find_listings")
+@RequestMapping("/location_listings")
 public class FindListingsController {
 
-    @RequestMapping(method = RequestMethod.GET)
-    public ArrayList<ListResultDAO> findListings(@RequestParam String query){
+    @RequestMapping(method = RequestMethod.GET, value="/{query}")
+    public ArrayList<ListResultDAO> findListings(@PathVariable String query){
+        System.out.println(query);
         Properties props = new Properties();
         ClassLoader loader = Thread.currentThread().getContextClassLoader();
         InputStream input = loader.getResourceAsStream("api-key.properties");
