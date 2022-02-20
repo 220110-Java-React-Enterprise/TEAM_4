@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.team4.beans.apiResponseDAO.locations.LocationDAO;
 import com.revature.team4.beans.apiResponseDAO.locations.LocationEntityDAO;
 import com.revature.team4.beans.apiResponseDAO.locations.LocationEntityGroupDAO;
+import com.revature.team4.util.DataStore;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
@@ -68,6 +69,9 @@ public class LocationController {
             //Getting index of 0
             LocationEntityGroupDAO locationEntityGroupDAO = locationDAO.getSuggestions()[0];
             List<LocationEntityDAO> entities = locationEntityGroupDAO.getEntities();
+
+            //Set the data store list to this list of locations and return it
+            DataStore.setCurrentLocationResults(entities);
             return entities;
         } catch (IOException e) {
             e.printStackTrace();

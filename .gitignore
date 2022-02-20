@@ -36,3 +36,4 @@ build/
 *.properties
 application.properties
 api-key.properties
+admin.properties
