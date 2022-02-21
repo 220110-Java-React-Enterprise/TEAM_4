@@ -25,17 +25,18 @@
                         console.log(element);
                         let tmpUrl = "hotel_listing.html?userId=" + userId + 
                             "&hotelId=" + element.id;
-                        funcStr = "<tr id=\"" + element.id + "\"><td><a href=\"" + tmpUrl + "\">" + element.name + "</a></td>" +
-                            "<td>" + element.starRating + "</td>" +
-                            "<td>" + element.currentPrice + "</td>" +
-                            "<td><input class=\"inputButton\" id=\"search\" name=\"search\" type=\"button\" onclick=\"bookHotel(" + 
-                            element.id + "," + 
-                            "\'" + element.name + "\'," + 
-                            element.starRating + "," + 
-                            "\'" + element.currentPrice + "\'" +
-                            ")\" " +
-                            "value=\"Book it now\"></td></tr>";
-                        console.log(funcStr);
+
+                        // funcStr = "<tr id=\"" + element.id + "\"><td><a href=\"" + tmpUrl + "\">" + element.name + "</a></td>" +
+                        //     "<td>" + element.starRating + "</td>" +
+                        //     "<td>" + element.currentPrice + "</td>" +
+                        //     "<td><input class=\"inputButton\" id=\"search\" name=\"search\" type=\"button\" onclick=\"bookHotel(" + 
+                        //     element.id + "," + 
+                        //     "\'" + element.name + "\'," + 
+                        //     element.starRating + "," + 
+                        //     "\'" + element.currentPrice + "\'" +
+                        //     ")\" " +
+                        //     "value=\"Book it now\"></td></tr>";
+                        // console.log(funcStr);
 
                         document.getElementById("resultsTable").innerHTML =
                         document.getElementById("resultsTable").innerHTML.concat(
@@ -44,9 +45,9 @@
                             "<td>" + element.currentPrice + "</td>" +
                             "<td><input class=\"inputButton\" id=\"search\" name=\"search\" type=\"button\" onclick=\"bookHotel(" + 
                             element.id + "," + 
-                            element.name + "," + 
+                            "\'" + element.name + "\'," + 
                             element.starRating + "," + 
-                            element.currentPrice +
+                            "\'" + element.currentPrice + "\'" +
                             ")\" " +
                             "value=\"Book it now\"></td></tr>"
                         );
@@ -96,13 +97,13 @@
                 <th>Star Rating</th>
                 <th>Current Price</th>
                 <th>Book It Now</th>
-                <tr id="2234464608">
+                <!-- <tr id="2234464608">
                     <td><a href="hotel_listing.html?userId=1&hotelId=2234464608">Super Lake Hotel</a></td>
                     <td>0</td>
                     <td>$69</td>
                     <td><input class="inputButton" id="search" name="search" type="button" 
                         onclick="bookHotel(2234464608,'Super Lake Hotel',0,'$69')" value="Book it now"></td>
-                </tr>
+                </tr> -->
             </tr>
         </table>
     </body>
