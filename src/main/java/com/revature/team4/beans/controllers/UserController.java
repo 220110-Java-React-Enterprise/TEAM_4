@@ -85,6 +85,8 @@ public class UserController {
     }
 
     //Method to automatically generate admin account every time the application starts if it does not exist
+    @RequestMapping(method = RequestMethod.POST, value="/admin")
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public void createAdmin() {
         //Load admin info from the properties file
         Properties properties = new Properties();
@@ -97,6 +99,10 @@ public class UserController {
             //Create the user object holding admin info
             User admin = new User(properties.getProperty("email"), properties.getProperty("password"));
 
+            //Check if admin already exists; save if not
+            if (getUserByEmail(admin.getEmail()) == null) {
+                userRepo.save(admin);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

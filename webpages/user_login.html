@@ -6,6 +6,14 @@
     </head>
     <body>
         <script type="text/javascript">
+            async function createAdmin() {
+                let url = "http://localhost:8080/users/admin";
+
+                let response = await fetch(url, {
+                    method: 'POST'
+                });
+            }
+
             async function loginFunction() {
                 let goodUrl = "http://localhost:8080/users";
                 let user = {
@@ -22,6 +30,8 @@
                     alert("Error: login credentials do not match any user.");
                 }
             }
+
+            createAdmin();
         </script>
         <h1>User Login</h1>
         <form>
