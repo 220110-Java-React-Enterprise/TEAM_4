@@ -8,17 +8,18 @@
             async function searchHotels() {
                 let url = "http://localhost:8080/location_listings/";
                 let currentUrl = window.location.href;
-                let destinationIndex = currentUrl.indexOf("?");
+                //let destinationIndex = currentUrl.indexOf("?");
                 //let destinationId = currentUrl.substring(destinationIndex + 15);
-                //document.write(destinationId);
+                
                 let params = (new URL(document.location)).searchParams;
 
-                let userId = params.get("userId")
+                let userId = params.get("userId");
                 let destinationId = params.get("destinationId");
 
                 let urlWithParam = url + destinationId;
                 let response = await fetch(urlWithParam);
                 let text = await response.json();
+                let json = await response.body.json();
    
                 if (text) {
                     for (element of text) {

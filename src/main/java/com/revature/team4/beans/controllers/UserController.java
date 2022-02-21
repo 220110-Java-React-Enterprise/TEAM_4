@@ -98,6 +98,7 @@ public class UserController {
 
             //Create the user object holding admin info
             User admin = new User(properties.getProperty("email"), properties.getProperty("password"));
+            admin.setAdmin(true);
 
             //Check if admin already exists; save if not
             if (getUserByEmail(admin.getEmail()) == null) {
@@ -106,5 +107,21 @@ public class UserController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    //Method to check if a given user is an admin
+    @RequestMapping(method = RequestMethod.GET, value="/admin/{userId}")
+    public Boolean isAdmin(@PathVariable Integer userId) {
+        //Attempt to load user from database
+        Optional<User> optionalUser = userRepo.findById(userId);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+
+            //Return true if user was found and is admin; false otherwise
+            return user.isAdmin();
+        }
+
+        //Return false if user was not found
+        return false;
     }
 }

@@ -1,49 +1,59 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>User Login</title>
 
-    </head>
-    <body>
-        <script type="text/javascript">
-            async function createAdmin() {
-                let url = "http://localhost:8080/users/admin";
+<head>
+    <title>User Login</title>
 
-                let response = await fetch(url, {
-                    method: 'POST'
-                });
+</head>
+
+<body>
+    <script type="text/javascript">
+        async function createAdmin() {
+            let url = "http://localhost:8080/users/admin";
+
+            let response = await fetch(url, {
+                method: 'POST'
+            });
+        }
+
+        async function loginFunction() {
+            let goodUrl = "http://localhost:8080/users";
+            let user = {
+                email: document.getElementById("email").value,
+                password: document.getElementById("password").value
             }
+            let urlWithParam = goodUrl + "?email=" + user.email + "&password=" + user.password;
+            console.log(urlWithParam);
+            let response = await fetch(urlWithParam);
+            //let text = await response.text();
 
-            async function loginFunction() {
-                let goodUrl = "http://localhost:8080/users";
-                let user = {
-                    email: document.getElementById("email").value,
-                    password: document.getElementById("password").value
-                }
-                let urlWithParam = goodUrl + "?email=" + user.email + "&password=" + user.password;
-                let response = await fetch(urlWithParam);
-                let text = await response.json();
-                if (text) {
-                    alert("Login Good!");
-                    window.location.href = "location_search.html?userId=" + text.userId;
+            try {
+                let json = await response.json();
+
+                if (json.admin) {
+                    window.location.href = "admin_dash.html?userId=" + json.userId;
                 } else {
-                    alert("Error: login credentials do not match any user.");
+                    window.location.href = "user_dash.html?userId=" + json.userId;
                 }
+            } catch (error) {
+                alert("Error: login credentials do not match any user.");
             }
+        }
 
-            async function registration() {
-                window.location.href = "user_registration.html";
-            }
+        async function registration() {
+            window.location.href = "user_registration.html";
+        }
 
-            createAdmin();
-        </script>
-        <h1>User Login</h1>
-        <form>
-            <input id="email" name="email" type="text"><br/>
-            <input id="password" name="password" type="password"><br/>
-            <input id="login" name="login" type="button" onclick="loginFunction()" value="Login">
-            <input id="register" name="register" type="button" onclick="registration()" value="New User">
-        </form>
+        createAdmin();
+    </script>
+    <h1>User Login</h1>
+    <form>
+        <input id="email" name="email" type="text"><br />
+        <input id="password" name="password" type="password"><br />
+        <input id="login" name="login" type="button" onclick="loginFunction()" value="Login">
+        <input id="register" name="register" type="button" onclick="registration()" value="New User">
+    </form>
 
-    </body>
+</body>
+
 </html>
