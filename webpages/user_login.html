@@ -14,11 +14,10 @@
                 }
                 let urlWithParam = goodUrl + "?email=" + user.email + "&password=" + user.password;
                 let response = await fetch(urlWithParam);
-                let text = await response.text();
-                console.log(response);
+                let text = await response.json();
                 if (text) {
                     alert("Login Good!");
-                    window.location.href = "location_search.html";
+                    window.location.href = "location_search.html?userId=" + text.userId;
                 } else {
                     alert("Error: login credentials do not match any user.");
                 }
