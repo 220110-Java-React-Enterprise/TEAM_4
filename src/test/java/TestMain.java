@@ -1,5 +1,6 @@
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.team4.beans.apiResponseDAO.photos.PhotosResponseDAO;
 import com.revature.team4.beans.apiResponseDAO.propertiesList.PropertyListDAO;
 import com.revature.team4.beans.controllers.FindListingsController;
 import com.squareup.okhttp.OkHttpClient;
@@ -10,6 +11,11 @@ import java.io.IOException;
 
 public class TestMain {
     public static void main(String ...args) {
+        PhotosResponseDAO.HotelImage hotelImage = new PhotosResponseDAO.HotelImage();
+        hotelImage.setBaseUrl("https://exp.cdn-hotels.com/hotels/37000000/36790000/36789900/36789845/d4aada11_{size}.jpg");
+        System.out.println(hotelImage.getURLWithSuffix("z"));
+        /*
+
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder()
@@ -38,6 +44,6 @@ public class TestMain {
 
         FindListingsController fl = new FindListingsController();
         //System.out.println(fl.findListings());
-
+*/
     }
 }

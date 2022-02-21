@@ -1,5 +1,6 @@
 package com.revature.team4.beans.controllers;
 
+import com.revature.team4.beans.apiResponseDAO.photos.PhotosResponseDAO;
 import com.revature.team4.beans.apiResponseDAO.propertiesList.ListResultDAO;
 import com.revature.team4.util.DataStore;
 import com.squareup.okhttp.Response;
@@ -22,7 +23,7 @@ public class FindListingsController {
 
     @RequestMapping(method = RequestMethod.GET, value="/{query}")
     public ArrayList<ListResultDAO> findListings(@PathVariable String query){
-        System.out.println(query);
+        //Get api key from properties file
         Properties props = new Properties();
         ClassLoader loader = Thread.currentThread().getContextClassLoader();
         InputStream input = loader.getResourceAsStream("api-key.properties");
@@ -57,5 +58,43 @@ public class FindListingsController {
             e.printStackTrace();
         }
     return null;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value="/photos/{query}")
+    public PhotosResponseDAO findPhotos(@PathVariable String query) {
+        //Get api key from properties file
+        Properties props = new Properties();
+        ClassLoader loader = Thread.currentThread().getContextClassLoader();
+        InputStream input = loader.getResourceAsStream("api-key.properties");
+
+        try{
+            props.load(input);
+
+            //Build http request
+            OkHttpClient client = new OkHttpClient();
+            StringBuilder urlBuilder = new StringBuilder("https://hotels4.p.rapidapi.com/properties/get-hotel-photos?id=");
+            urlBuilder.append(query);
+
+            Request request = new Request.Builder()
+                    .url(urlBuilder.toString())
+                    .get()
+                    .addHeader("x-rapidapi-host", "hotels4.p.rapidapi.com")
+                    .addHeader("x-rapidapi-key", props.getProperty("api-key"))
+                    .build();
+
+            Response response = client.newCall(request).execute();
+            String jsonString = response.body().string();
+
+            //Map the json to the photo respose DAO
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            PhotosResponseDAO photosResponseDAO = mapper.readValue(jsonString, PhotosResponseDAO.class);
+
+            return photosResponseDAO;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }
