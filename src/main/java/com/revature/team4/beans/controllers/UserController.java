@@ -27,6 +27,17 @@ public class UserController {
         this.bookingRepo = bookingRepo;
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/{userId}")
+    public User getUserByID(@PathVariable Integer userId) {
+        Optional<User> optionalUser = userRepo.findById(userId);
+
+        if (optionalUser.isPresent()) {
+            return optionalUser.get();
+        }
+
+        return null;
+    }
+
     @RequestMapping(method = RequestMethod.GET)
     public User login(@RequestParam String email, @RequestParam String password) {
         List<User> users = userRepo.findAll();

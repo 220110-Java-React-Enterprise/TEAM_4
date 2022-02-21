@@ -10,7 +10,7 @@
 
     <script type="text/javascript">
         async function searchLocation() {
-            
+
             let url = "http://localhost:8080/locations/";
             let query = document.getElementById("locationSearch").value;
 
@@ -25,7 +25,7 @@
                 for (element of text) {
                     console.log(element);
                     let destinationId = element.destinationId;
-                    let tmpUrl = "location_listings.html?userId=" + userId + 
+                    let tmpUrl = "location_listings.html?userId=" + userId +
                         "&destinationId=" + destinationId;
 
                     document.getElementById("resultsTable").innerHTML =

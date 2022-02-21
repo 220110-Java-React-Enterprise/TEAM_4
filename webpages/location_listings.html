@@ -19,7 +19,6 @@
                 let urlWithParam = url + destinationId;
                 let response = await fetch(urlWithParam);
                 let text = await response.json();
-                let json = await response.body.json();
    
                 if (text) {
                     for (element of text) {
