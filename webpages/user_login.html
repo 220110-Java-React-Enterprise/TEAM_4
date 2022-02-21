@@ -6,6 +6,14 @@
     </head>
     <body>
         <script type="text/javascript">
+            async function createAdmin() {
+                let url = "http://localhost:8080/users/admin";
+
+                let response = await fetch(url, {
+                    method: 'POST'
+                });
+            }
+
             async function loginFunction() {
                 let goodUrl = "http://localhost:8080/users";
                 let user = {
@@ -14,21 +22,27 @@
                 }
                 let urlWithParam = goodUrl + "?email=" + user.email + "&password=" + user.password;
                 let response = await fetch(urlWithParam);
-                let text = await response.text();
-                console.log(response);
+                let text = await response.json();
                 if (text) {
                     alert("Login Good!");
-                    window.location.href = "location_search.html";
+                    window.location.href = "location_search.html?userId=" + text.userId;
                 } else {
                     alert("Error: login credentials do not match any user.");
                 }
             }
+
+            async function registration() {
+                window.location.href = "user_registration.html";
+            }
+
+            createAdmin();
         </script>
         <h1>User Login</h1>
         <form>
             <input id="email" name="email" type="text"><br/>
             <input id="password" name="password" type="password"><br/>
             <input id="login" name="login" type="button" onclick="loginFunction()" value="Login">
+            <input id="register" name="register" type="button" onclick="registration()" value="New User">
         </form>
 
     </body>
