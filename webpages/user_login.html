@@ -31,6 +31,10 @@
                 }
             }
 
+            async function registration() {
+                window.location.href = "user_registration.html";
+            }
+
             createAdmin();
         </script>
         <h1>User Login</h1>
@@ -38,6 +42,7 @@
             <input id="email" name="email" type="text"><br/>
             <input id="password" name="password" type="password"><br/>
             <input id="login" name="login" type="button" onclick="loginFunction()" value="Login">
+            <input id="register" name="register" type="button" onclick="registration()" value="New User">
         </form>
 
     </body>
