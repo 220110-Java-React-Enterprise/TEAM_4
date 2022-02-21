@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>User Dashboard</title>
+    </head>
+    <body>
+        <script>
+            async function loadUserInfo() {
+                let params = (new URL(document.location)).searchParams;
+                let userId = params.get("userId");
+
+                document.getElementById("locationSearch").innerHTML =
+                    "<a href=\"location_search.html?userId=" + userId + "\">Location Search</a>";
+                document.getElementById("userBookings").innerHTML =
+                    "<a href=\"location_search.html?userId=" + userId + "\">User Bookings</a>";
+                document.getElementById("accountManagement").innerHTML =
+                    "<a href=\"location_search.html?userId=" + userId + "\">Location Search</a>";
+                }
+        </script>
+        <div id="locationSearch">
+            test
+        </div>
+        <div id="userBookings">
+
+        </div>
+        <div id="accountManagement">
+            
+        </div>
+        <script>
+            loadUserInfo();
+        </script>
+    </body>
+</html>
