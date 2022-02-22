@@ -7,6 +7,31 @@
     <body>
         <script>
             checkIfAdmin();
+
+            async function loadAdminInfo() {
+                let params = (new URL(document.location)).searchParams;
+                let userId = params.get("userId");
+
+                document.getElementById("getAllBookings").innerHTML =
+                    "<a href=\"admin_all_bookings.html?adminId=" + userId + "\">See All Bookings</a>";
+                document.getElementById("getBookingsByUser").innerHTML =
+                    "<a href=\"admin_user_bookings.html?adminId=" + userId + "\">See All Bookings By User</a>";
+                document.getElementById("getAllUsers").innerHTML =
+                    "<a href=\"admin_all_users.html?adminId=" + userId + "\">See All Users</a>";
+            }
+        </script>
+        <div id="getAllBookings">
+            
+        </div>
+        <div id="getBookingsByUser">
+
+        </div>
+        <div id="getAllUsers">
+
+        </div>
+
+        <script>
+            loadAdminInfo();
         </script>
 
     </body>
