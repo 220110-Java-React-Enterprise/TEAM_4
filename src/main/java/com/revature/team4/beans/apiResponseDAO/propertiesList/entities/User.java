@@ -1,4 +1,4 @@
-package com.revature.team4.beans.entities;
+package com.revature.team4.beans.apiResponseDAO.propertiesList.entities;
 
 import javax.persistence.*;
 import java.util.LinkedList;

@@ -2,9 +2,8 @@ package com.revature.team4.util;
 
 import com.revature.team4.beans.apiResponseDAO.locations.LocationEntityDAO;
 import com.revature.team4.beans.apiResponseDAO.propertiesList.ListResultDAO;
-import com.revature.team4.beans.entities.User;
+import com.revature.team4.beans.apiResponseDAO.propertiesList.entities.User;
 
-import java.util.ArrayList;
 import java.util.List;
 
 //Class to hold static members that can be accessed easily throughout the application
