@@ -37,3 +37,4 @@ build/
 application.properties
 api-key.properties
 admin.properties
+/target/

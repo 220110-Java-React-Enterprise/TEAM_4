@@ -16,11 +16,12 @@
                 try {
                     let json = await response.json();
 
-                    let tmpHtml = "<tr><th>Hotel Name</th><th>Cancel Booking</th></tr>";
-                    for (element of json) {
-                        tmpHtml = tmpHtml.concat("<tr><td" +  element.name +
-                            "<td><input class=\"inputButton\" type=\"button\" onclick=\"cancelBooking(" +
-                            userId + "," + element.bookingId + ")\" value=\"Cancel\"></td></tr>");
+                    let tmpHtml = "<tr><th>Hotel Name</th></tr>";
+                    for (let element of json) {
+                        console.log(element);
+                        tableRow = "<tr><td>" +  element.name + "</td></tr>";
+                        console.log(tableRow);
+                        tmpHtml = tmpHtml.concat(tableRow);
                     }
 
                     document.getElementById("resultsTable").innerHTML = tmpHtml;
