@@ -6,6 +6,7 @@ import com.revature.team4.beans.apiResponseDAO.locations.LocationDAO;
 import com.revature.team4.beans.apiResponseDAO.locations.LocationEntityDAO;
 import com.revature.team4.beans.apiResponseDAO.locations.LocationEntityGroupDAO;
 import com.revature.team4.util.DataStore;
+import com.revature.team4.util.ExceptionLogger;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
@@ -68,7 +69,7 @@ public class LocationController {
             DataStore.setCurrentLocationResults(entities);
             return entities;
         } catch (IOException e) {
-            e.printStackTrace();
+            ExceptionLogger.getExceptionLogger().log(e);
             return null;
         }
     }

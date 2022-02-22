@@ -1,99 +1,106 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Hotel Results</title>
-    </head>
-    <body>
-        <script>
-            async function searchHotels() {
-                let url = "http://localhost:8080/location_listings/";
-                let currentUrl = window.location.href;
-                
-                let params = (new URL(document.location)).searchParams;
 
-                let userId = params.get("userId");
-                let destinationId = params.get("destinationId");
+<head>
+    <title>Hotel Results</title>
+</head>
 
-                let urlWithParam = url + destinationId;
-                let response = await fetch(urlWithParam);
-                let text = await response.json();
-   
-                if (text) {
-                    for (element of text) {
-                        console.log(element);
-                        let tmpUrl = "hotel_listing.html?userId=" + userId + 
-                            "&hotelId=" + element.id;
+<body>
+    <script>
+        async function searchHotels() {
+            let url = "http://localhost:8080/location_listings/";
+            let currentUrl = window.location.href;
 
-                        document.getElementById("resultsTable").innerHTML =
+            let params = (new URL(document.location)).searchParams;
+
+            let userId = params.get("userId");
+            let destinationId = params.get("destinationId");
+
+            let urlWithParam = url + destinationId;
+            let response = await fetch(urlWithParam);
+            let text = await response.json();
+
+            if (text) {
+                for (element of text) {
+                    console.log(element);
+                    let tmpUrl = "hotel_listing.html?userId=" + userId +
+                        "&hotelId=" + element.id;
+
+                    document.getElementById("resultsTable").innerHTML =
                         document.getElementById("resultsTable").innerHTML.concat(
                             "<tr id=\"" + element.id + "\"><td><a href=\"" + tmpUrl + "\">" + element.name + "</a></td>" +
                             "<td>" + element.starRating + "</td>" +
                             "<td>" + element.currentPrice + "</td>" +
-                            "<td><input class=\"inputButton\" id=\"search\" name=\"search\" type=\"button\" onclick=\"bookHotel(" + 
-                            element.id + "," + 
-                            "\'" + element.name + "\'," + 
-                            element.starRating + "," + 
+                            "<td><input class=\"inputButton\" id=\"search\" name=\"search\" type=\"button\" onclick=\"bookHotel(" +
+                            element.id + "," +
+                            "\'" + element.name + "\'," +
+                            element.starRating + "," +
                             "\'" + element.currentPrice + "\'" +
                             ")\" " +
                             "value=\"Book it now\"></td></tr>"
                         );
-                    }
-                } else {
-                    alert("Error: search failed.");
                 }
+            } else {
+                alert("Error: search failed.");
             }
+        }
 
-            async function bookHotel(clickedId, clickedName, clickedStarRating, clickedCurrentPrice) {
-                let params = (new URL(document.location)).searchParams;
-                let userId = params.get("userId");
-                let url = "http://localhost:8080/users/" + userId + "/bookings";
+        async function bookHotel(clickedId, clickedName, clickedStarRating, clickedCurrentPrice) {
+            let params = (new URL(document.location)).searchParams;
+            let userId = params.get("userId");
+            let url = "http://localhost:8080/users/" + userId + "/bookings";
 
-                bookingObj = {
-                    hotelId: clickedId,
-                    name: clickedName,
-                    starRating: clickedStarRating,
-                    currentPrice: clickedCurrentPrice
-                }
-                let response = await fetch(url, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json;charset=utf-8'
-                    },
-                    body: JSON.stringify(bookingObj)
-                });
-                let text = await response.text();
-                console.log(text);
-                if (text) {
-                    alert('Reservation good!');
-                    window.location.href = "user_dash.html?userId=" + userId;
-                } else {
-                    alert("Error: could not create new booking.");
-                }
-            }    
-            searchHotels();
-        </script>
+            let inputStartDate = document.getElementById("start").value;
+            let inputEndDate = document.getElementById("end").value;
 
-<h1>Date goes here</h1>
-<label for="start">Start date:</label>
-<input type="date" id="start" name="trip-start">
-       <label for="end">End date:</label>
-<input type="date" id="end" name="trip-end">
+            let urlWithParams = url + "?startDate=" + inputStartDate + "&endDate=" + inputEndDate;
+            console.log(urlWithParams);
 
-        <table id="resultsTable">
-            <tr>
-                <th>Name</th>
-                <th>Star Rating</th>
-                <th>Current Price</th>
-                <th>Book It Now</th>
-                <!-- <tr id="2234464608">
+            bookingObj = {
+                hotelId: clickedId,
+                name: clickedName,
+                starRating: clickedStarRating,
+                currentPrice: clickedCurrentPrice
+            }
+            let response = await fetch(urlWithParams, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify(bookingObj)
+            });
+            let text = await response.text();
+            console.log(text);
+            if (text) {
+                alert('Reservation bad!');
+            } else {
+                alert("Reservation Good.");
+            }
+        }
+        searchHotels();
+    </script>
+
+    <h1>Date goes here</h1>
+    <label for="start">Start date:</label>
+    <input type="date" id="start" name="trip-start">
+    <label for="end">End date:</label>
+    <input type="date" id="end" name="trip-end">
+
+    <table id="resultsTable">
+        <tr>
+            <th>Name</th>
+            <th>Star Rating</th>
+            <th>Current Price</th>
+            <th>Book It Now</th>
+            <!-- <tr id="2234464608">
                     <td><a href="hotel_listing.html?userId=1&hotelId=2234464608">Super Lake Hotel</a></td>
                     <td>0</td>
                     <td>$69</td>
                     <td><input class="inputButton" id="search" name="search" type="button" 
                         onclick="bookHotel(2234464608,'Super Lake Hotel',0,'$69')" value="Book it now"></td>
                 </tr> -->
-            </tr>
-        </table>
-    </body>
+        </tr>
+    </table>
+</body>
+
 </html>
-    

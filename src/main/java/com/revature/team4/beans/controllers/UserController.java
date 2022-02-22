@@ -1,10 +1,10 @@
 package com.revature.team4.beans.controllers;
 
-import com.revature.team4.beans.apiResponseDAO.propertiesList.entities.Booking;
-import com.revature.team4.beans.apiResponseDAO.propertiesList.entities.User;
+import com.revature.team4.beans.entities.User;
 import com.revature.team4.beans.repositories.BookingRepo;
 import com.revature.team4.beans.repositories.UserRepo;
 import com.revature.team4.util.DataStore;
+import com.revature.team4.util.ExceptionLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -65,7 +65,7 @@ public class UserController {
         try {
             return userRepo.save(user);
         } catch (Exception e) {
-            e.printStackTrace();
+            ExceptionLogger.getExceptionLogger().log(e);
             return null;
         }
     }
@@ -118,7 +118,7 @@ public class UserController {
                 userRepo.save(admin);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            ExceptionLogger.getExceptionLogger().log(e);
         }
     }
 
