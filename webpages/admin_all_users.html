@@ -10,6 +10,7 @@
                 let currentUrl = window.location.href;
                 let params = (new URL(document.location)).searchParams;
                 let adminId = params.get("adminId");
+                let userId = params.get("userId");
                 let urlWithParam = url + "all";
                 let response = await fetch(urlWithParam);
                 try{
@@ -23,6 +24,8 @@
                         tmpHtml = tmpHtml.concat(tableRow);
                     }
                     document.getElementById("resultsTable").innerHTML = tmpHtml;
+                    document.getElementById("getAllUsersBookings").innerHTML = 
+                    "<a href=\"admin_user_bookings.html?adminId=" + adminId + "&userId=" + userId + "\">See all bookings!</a>";;
 
                 } catch (error) {
                     alert("Error: no current user found.")
@@ -31,7 +34,12 @@
             }
             userInformation();
         </script>
+
                 <table id="resultsTable" class="table">
+                    <div id="getAllUsersBookings">
+
+                    </div>
                 </table>
+
     </body>
 </html>
