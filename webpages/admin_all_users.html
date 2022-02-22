@@ -15,30 +15,24 @@
                 let response = await fetch(urlWithParam);
                 try{
                     let json = await response.json();
-                    let tmpHtml = "<tr><th>User ID</th><th>Email</th><th>Admin</th></tr>";
+                    let tmpHtml = "<tr><th>User ID</th><th>Email</th><th>Admin</th><th>See all bookings</th></tr>";
                     for (let element of json) {
                         tableRow = 
                         "<tr><td>" + element.userId + "</td>" +
                         "<td>" + element.email + "</td>" +
-                        "<td>" + element.admin + "</td></tr>";
+                        "<td>" + element.admin + "</td>" + 
+                        "<td>" + "<a href=\"admin_user_bookings.html?adminId=" + adminId + "&userId=" + element.userId + "\">See all bookings!</a>" + "</td></tr>";
                         tmpHtml = tmpHtml.concat(tableRow);
                     }
                     document.getElementById("resultsTable").innerHTML = tmpHtml;
-                    document.getElementById("getAllUsersBookings").innerHTML = 
-                    "<a href=\"admin_user_bookings.html?adminId=" + adminId + "&userId=" + userId + "\">See all bookings!</a>";;
-
                 } catch (error) {
                     alert("Error: no current user found.")
-
                 }
             }
             userInformation();
         </script>
 
                 <table id="resultsTable" class="table">
-                    <div id="getAllUsersBookings">
-
-                    </div>
                 </table>
 
     </body>

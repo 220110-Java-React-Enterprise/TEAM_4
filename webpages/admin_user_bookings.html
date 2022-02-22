@@ -5,10 +5,41 @@
     </head>
     <body>
         <script>
-            
+            async function getUserBookings() {
+                let url = "http://localhost:8080/users/";
+                let currentUrl = window.location.href;
+                let params = (new URL(document.location)).searchParams;
+                let userId = params.get("userId");
+                let adminId = params.get("adminId");
+                let urlWithParam = url + userId + "/bookings";
+                let response = await fetch(urlWithParam);
+                try {
+                    let json = await response.json();
+                    let tmpHtml = "<tr><th>Hotel Name</th><th>Cancel Booking</th></tr>";
+                    for (element of json) {
+                        console.log(element);
+                        tmpHtml = tmpHtml.concat("<tr id=\"" + element.bookingId + "\"><td>" + element.name +
+                            "<td><input class=\"inputButton\" type=\"button\" onclick=\"cancelBooking(" +
+                            userId + "," + element.bookingId + ")\" value=\"Cancel\"></td></tr>");
+                    }
+                    document.getElementById("resultsTable").innerHTML = tmpHtml;
+                } catch (error) {
+                    alert("Error: user has no current bookings.")
+                }
+            }
+            async function cancelBooking(userId, bookingId) {
+                let url = "http://localhost:8080/users/" + userId + "/bookings/" + bookingId;
+
+                let response = await fetch(url, {
+                    method: 'DELETE'
+                });
+
+                getUserBookings();
+            }
+            getUserBookings();
         </script>
         <table id="resultsTable">
-
         </table>
     </body>
 </html>
+
