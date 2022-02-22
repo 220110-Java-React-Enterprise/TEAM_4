@@ -11,11 +11,9 @@
                 let params = (new URL(document.location)).searchParams;
                 let adminId = params.get("adminId");
                 let urlWithParam = url + adminId + "/bookings/all";
-
                 let response = await fetch(urlWithParam);
                 try {
                     let json = await response.json();
-
                     let tmpHtml = "<tr><th>Hotel Name</th></tr>";
                     for (let element of json) {
                         console.log(element);
@@ -23,17 +21,14 @@
                         console.log(tableRow);
                         tmpHtml = tmpHtml.concat(tableRow);
                     }
-
                     document.getElementById("resultsTable").innerHTML = tmpHtml;
                 } catch (error) {
                     alert("Error: no current bookings found.")
                 }
             }
-
             getAllBookings();
         </script>
         <table id="resultsTable" class="table">
-
         </table>
     </body>
 </html>

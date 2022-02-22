@@ -1,6 +1,7 @@
 package com.revature.team4.beans.controllers;
 
-import com.revature.team4.beans.entities.User;
+import com.revature.team4.beans.apiResponseDAO.propertiesList.entities.Booking;
+import com.revature.team4.beans.apiResponseDAO.propertiesList.entities.User;
 import com.revature.team4.beans.repositories.BookingRepo;
 import com.revature.team4.beans.repositories.UserRepo;
 import com.revature.team4.util.DataStore;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
@@ -27,14 +27,17 @@ public class UserController {
         this.bookingRepo = bookingRepo;
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/all")
+    public List<User> getAllUsers(){
+    return userRepo.findAll();
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/{userId}")
     public User getUserByID(@PathVariable Integer userId) {
         Optional<User> optionalUser = userRepo.findById(userId);
-
         if (optionalUser.isPresent()) {
             return optionalUser.get();
         }
-
         return null;
     }
 
@@ -90,7 +93,6 @@ public class UserController {
                 return u;
             }
         }
-
         //Return null if user with email not found
         return null;
     }

@@ -1,8 +1,8 @@
 package com.revature.team4.beans.controllers;
 
 import com.revature.team4.beans.apiResponseDAO.propertiesList.ListResultDAO;
-import com.revature.team4.beans.entities.Booking;
-import com.revature.team4.beans.entities.User;
+import com.revature.team4.beans.apiResponseDAO.propertiesList.entities.Booking;
+import com.revature.team4.beans.apiResponseDAO.propertiesList.entities.User;
 import com.revature.team4.beans.repositories.BookingRepo;
 import com.revature.team4.beans.repositories.UserRepo;
 import com.revature.team4.util.DataStore;
@@ -30,9 +30,7 @@ public class BookingController {
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void newBooking(@RequestBody Booking booking, @PathVariable Integer userId) throws Exception {
-        //User user = userRepo.getById(userId);
         Optional<User> optionalUser = userRepo.findById(userId);
-//        List<ListResultDAO> lRD = findListingsController.findListings("1506246");
         List<ListResultDAO> lRD = DataStore.getCurrentListingsResults();
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
