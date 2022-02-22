@@ -49,4 +49,51 @@ public class BookingController {
             throw new Exception("User not found...");
         }
     }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public List<Booking> getAllBookingsForUser(@PathVariable Integer userId) {
+        Optional<User> optionalUser = userRepo.findById(userId);
+        if (optionalUser.isPresent()) {
+            return optionalUser.get().getBookings();
+        } else {
+            return null;
+        }
+    }
+
+    @RequestMapping(value = "/{bookingId}")
+    public Booking getBookingForUserById(@PathVariable Integer userId, @PathVariable Integer bookingId) {
+        Optional<User> optionalUser = userRepo.findById(userId);
+        if (optionalUser.isPresent()) {
+            for (Booking b : optionalUser.get().getBookings()) {
+                if (b.getBookingId().equals(bookingId)) {
+                    return b;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    @RequestMapping(value = "/{bookingId}", method = RequestMethod.PUT)
+    public void updateBooking(@RequestBody Booking updateBooking, @PathVariable Integer bookingId) {
+        Optional<Booking> optionalBooking = bookingRepo.findById(bookingId);
+        if(optionalBooking.isPresent() && updateBooking.getBookingId().equals(bookingId)) {
+            bookingRepo.save(updateBooking);
+        }
+    }
+
+    @RequestMapping(value = "/{bookingId}", method = RequestMethod.DELETE)
+    public void deleteBooking(@PathVariable Integer userId, @PathVariable Integer bookingId) {
+        Optional<User> optionalUser = userRepo.findById(userId);
+        if(optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            for (Booking b : user.getBookings()) {
+                user.removeBooking(b);
+                bookingRepo.delete(b);
+                userRepo.save(user);
+                break;
+            }
+        }
+    }
+
 }

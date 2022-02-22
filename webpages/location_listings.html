@@ -8,8 +8,6 @@
             async function searchHotels() {
                 let url = "http://localhost:8080/location_listings/";
                 let currentUrl = window.location.href;
-                //let destinationIndex = currentUrl.indexOf("?");
-                //let destinationId = currentUrl.substring(destinationIndex + 15);
                 
                 let params = (new URL(document.location)).searchParams;
 
@@ -26,18 +24,6 @@
                         let tmpUrl = "hotel_listing.html?userId=" + userId + 
                             "&hotelId=" + element.id;
 
-                        // funcStr = "<tr id=\"" + element.id + "\"><td><a href=\"" + tmpUrl + "\">" + element.name + "</a></td>" +
-                        //     "<td>" + element.starRating + "</td>" +
-                        //     "<td>" + element.currentPrice + "</td>" +
-                        //     "<td><input class=\"inputButton\" id=\"search\" name=\"search\" type=\"button\" onclick=\"bookHotel(" + 
-                        //     element.id + "," + 
-                        //     "\'" + element.name + "\'," + 
-                        //     element.starRating + "," + 
-                        //     "\'" + element.currentPrice + "\'" +
-                        //     ")\" " +
-                        //     "value=\"Book it now\"></td></tr>";
-                        // console.log(funcStr);
-
                         document.getElementById("resultsTable").innerHTML =
                         document.getElementById("resultsTable").innerHTML.concat(
                             "<tr id=\"" + element.id + "\"><td><a href=\"" + tmpUrl + "\">" + element.name + "</a></td>" +
@@ -51,9 +37,6 @@
                             ")\" " +
                             "value=\"Book it now\"></td></tr>"
                         );
-
-                        
-
                     }
                 } else {
                     alert("Error: search failed.");
@@ -61,11 +44,9 @@
             }
 
             async function bookHotel(clickedId, clickedName, clickedStarRating, clickedCurrentPrice) {
-                console.log("error here 1");
                 let params = (new URL(document.location)).searchParams;
                 let userId = params.get("userId");
                 let url = "http://localhost:8080/users/" + userId + "/bookings";
-               // let bookingHotelId = clickedHotel;
 
                 bookingObj = {
                     hotelId: clickedId,
@@ -84,7 +65,7 @@
                 console.log(text);
                 if (text) {
                     alert('Reservation good!');
-                    window.location.href = "user_dash.html";
+                    window.location.href = "user_dash.html?userId=" + userId;
                 } else {
                     alert("Error: could not create new booking.");
                 }
