@@ -50,6 +50,11 @@ public class BookingController {
         }
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/all")
+    public List<Booking> getAllBookings() {
+        return bookingRepo.findAll();
+    }
+
     @RequestMapping(method = RequestMethod.GET)
     public List<Booking> getAllBookingsForUser(@PathVariable Integer userId) {
         Optional<User> optionalUser = userRepo.findById(userId);

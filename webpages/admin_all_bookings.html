@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>All Bookings</title>
+    </head>
+    <body>
+        <script>
+            async function getAllBookings() {
+                let url = "http://localhost:8080/users/";
+                let currentUrl = window.location.href;
+                let params = (new URL(document.location)).searchParams;
+                let adminId = params.get("adminId");
+                let urlWithParam = url + adminId + "/bookings/all";
+
+                let response = await fetch(urlWithParam);
+                try {
+                    let json = await response.json();
+
+                    let tmpHtml = "<tr><th>Hotel Name</th><th>Cancel Booking</th></tr>";
+                    for (element of json) {
+                        tmpHtml = tmpHtml.concat("<tr><td" +  element.name +
+                            "<td><input class=\"inputButton\" type=\"button\" onclick=\"cancelBooking(" +
+                            userId + "," + element.bookingId + ")\" value=\"Cancel\"></td></tr>");
+                    }
+
+                    document.getElementById("resultsTable").innerHTML = tmpHtml;
+                } catch (error) {
+                    alert("Error: no current bookings found.")
+                }
+            }
+
+            getAllBookings();
+        </script>
+        <table id="resultsTable" class="table">
+
+        </table>
+    </body>
+</html>
