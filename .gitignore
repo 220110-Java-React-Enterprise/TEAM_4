@@ -38,3 +38,4 @@ application.properties
 api-key.properties
 admin.properties
 /target/
+/target/classes/com/
