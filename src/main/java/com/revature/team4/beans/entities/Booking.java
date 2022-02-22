@@ -1,9 +1,8 @@
-package com.revature.team4.beans.apiResponseDAO.propertiesList.entities;
-
-import org.apache.tomcat.jni.Local;
+package com.revature.team4.beans.entities;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 public class Booking {
@@ -20,9 +19,9 @@ public class Booking {
     private Integer starRating;
 
     @Column
-    private LocalDateTime startDate;
+    private Date startDate;
     @Column
-    private LocalDateTime endDate;
+    private Date endDate;
 
     public Booking() {
     }
@@ -66,19 +65,19 @@ public class Booking {
         this.starRating = starRating;
     }
 
-    public LocalDateTime getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDateTime startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDateTime getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDateTime endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 }

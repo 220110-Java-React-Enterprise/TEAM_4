@@ -1,15 +1,18 @@
 package com.revature.team4.beans.controllers;
 
 import com.revature.team4.beans.apiResponseDAO.propertiesList.ListResultDAO;
-import com.revature.team4.beans.apiResponseDAO.propertiesList.entities.Booking;
-import com.revature.team4.beans.apiResponseDAO.propertiesList.entities.User;
+import com.revature.team4.beans.entities.Booking;
+import com.revature.team4.beans.entities.User;
 import com.revature.team4.beans.repositories.BookingRepo;
 import com.revature.team4.beans.repositories.UserRepo;
 import com.revature.team4.util.DataStore;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,15 +32,19 @@ public class BookingController {
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void newBooking(@RequestBody Booking booking, @PathVariable Integer userId) throws Exception {
+    public void newBooking(@RequestBody Booking booking, @PathVariable Integer userId, @RequestParam("startDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date startDate,
+                           @RequestParam("endDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date endDate) throws Exception {
         Optional<User> optionalUser = userRepo.findById(userId);
         List<ListResultDAO> lRD = DataStore.getCurrentListingsResults();
+
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             for(int i = 0; i < lRD.size(); i++){
                 if(booking.getHotelId().equals(lRD.get(i).getId())){
                     booking.setName(lRD.get(i).getName());
                     booking.setStarRating(lRD.get(i).getStarRating());
+                    booking.setStartDate(startDate);
+                    booking.setEndDate(endDate);
                     user.addBooking(booking);
                     bookingRepo.save(booking);
                     userRepo.save(user);

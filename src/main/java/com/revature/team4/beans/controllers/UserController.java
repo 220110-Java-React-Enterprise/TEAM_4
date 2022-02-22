@@ -1,7 +1,6 @@
 package com.revature.team4.beans.controllers;
 
-import com.revature.team4.beans.apiResponseDAO.propertiesList.entities.Booking;
-import com.revature.team4.beans.apiResponseDAO.propertiesList.entities.User;
+import com.revature.team4.beans.entities.User;
 import com.revature.team4.beans.repositories.BookingRepo;
 import com.revature.team4.beans.repositories.UserRepo;
 import com.revature.team4.util.DataStore;
