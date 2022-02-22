@@ -3,6 +3,7 @@ package com.revature.team4.beans.controllers;
 import com.revature.team4.beans.apiResponseDAO.photos.PhotosResponseDAO;
 import com.revature.team4.beans.apiResponseDAO.propertiesList.ListResultDAO;
 import com.revature.team4.util.DataStore;
+import com.revature.team4.util.ExceptionLogger;
 import com.squareup.okhttp.Response;
 import org.springframework.web.bind.annotation.*;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -55,7 +56,7 @@ public class FindListingsController {
             DataStore.setCurrentListingsResults(listings);
             return listings;
         } catch (IOException e) {
-            e.printStackTrace();
+            ExceptionLogger.getExceptionLogger().log(e);
         }
     return null;
     }
@@ -92,7 +93,7 @@ public class FindListingsController {
 
             return photosResponseDAO;
         } catch (IOException e) {
-            e.printStackTrace();
+            ExceptionLogger.getExceptionLogger().log(e);
         }
 
         return null;

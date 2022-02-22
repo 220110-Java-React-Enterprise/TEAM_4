@@ -52,8 +52,6 @@
 
             let inputStartDate = document.getElementById("start").value;
             let inputEndDate = document.getElementById("end").value;
-            let startDate = inputStartDate.substring(0, 4) + inputStartDate.substring(5, 7) + inputEndDate.substring(8);
-            let endDate = inputEndDate.substring(0, 4) + inputEndDate.substring(5, 7) + inputEndDate.substring(8);
 
             let urlWithParams = url + "?startDate=" + inputStartDate + "&endDate=" + inputEndDate;
             console.log(urlWithParams);
