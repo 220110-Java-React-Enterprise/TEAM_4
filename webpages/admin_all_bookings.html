@@ -7,7 +7,7 @@
     <body>
         <script>
             async function getAllBookings() {
-                let url = "http://localhost:8080/users/";
+                let url = "http://project2-env.eba-bsbc2m8b.us-east-1.elasticbeanstalk.com/users/";
                 let currentUrl = window.location.href;
                 let params = (new URL(document.location)).searchParams;
                 let adminId = params.get("adminId");
