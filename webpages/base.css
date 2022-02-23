@@ -1,0 +1,10 @@
+body {
+    background-image: url("Spello_and_Flowers_in_Alleyway_Italy_ngi5pr.png");
+    background-size: cover;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+div.block {
+    padding: 8px;
+    background: rgba(225, 225, 225, 0.75);
+}

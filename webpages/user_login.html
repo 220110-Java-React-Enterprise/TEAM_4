@@ -2,8 +2,8 @@
 <html>
 
 <head>
+    <link rel="stylesheet" href="base.css">
     <title>User Login</title>
-
 </head>
 
 <body>
@@ -25,7 +25,6 @@
             let urlWithParam = goodUrl + "?email=" + user.email + "&password=" + user.password;
             console.log(urlWithParam);
             let response = await fetch(urlWithParam);
-            //let text = await response.text();
 
             try {
                 let json = await response.json();
@@ -46,13 +45,18 @@
 
         createAdmin();
     </script>
-    <h1>User Login</h1>
-    <form>
-        <input id="email" name="email" type="text"><br />
-        <input id="password" name="password" type="password"><br />
-        <input id="login" name="login" type="button" onclick="loginFunction()" value="Login">
-        <input id="register" name="register" type="button" onclick="registration()" value="New User">
-    </form>
+    <div class="block">
+        <h1>Bed, Breakfast and Java</h1>
+        <h2>User Login</h2>
+        <form>
+            <input id="email" name="email" type="text">
+            <label for="email">email</label><br />
+            <input id="password" name="password" type="password">
+            <label for="password">password</label><br />
+            <input id="login" name="login" type="button" onclick="loginFunction()" value="Login">
+            <input id="register" name="register" type="button" onclick="registration()" value="New User">
+        </form>
+    </div>
 
 </body>
 
