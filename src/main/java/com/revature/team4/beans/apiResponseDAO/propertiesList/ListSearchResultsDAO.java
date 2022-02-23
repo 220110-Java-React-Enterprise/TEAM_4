@@ -2,6 +2,9 @@ package com.revature.team4.beans.apiResponseDAO.propertiesList;
 
 import java.util.ArrayList;
 
+/**
+ * A mid-level model object of data from hotels API response
+ */
 public class ListSearchResultsDAO {
     private Integer totalCount;
     private ArrayList<ListResultDAO> results;

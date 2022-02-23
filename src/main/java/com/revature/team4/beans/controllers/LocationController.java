@@ -17,9 +17,22 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Properties;
 
+/**
+ * handles requests to and responses from third-party hotels API
+ * contains GET method
+ */
 @RestController
 @RequestMapping("/locations")
 public class LocationController {
+
+    /**
+     *
+     * @param query
+     * @return - list of locations based on user search query
+     *
+     * this is the core of interacting with API -
+     * the API response is picked at little by little until we get to the data we want
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/{query}")
     public List<LocationEntityDAO> findLocation(@PathVariable String query) {
         //Get the hotels API key

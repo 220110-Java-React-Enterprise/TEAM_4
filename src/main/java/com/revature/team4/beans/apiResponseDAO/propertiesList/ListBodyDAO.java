@@ -1,5 +1,8 @@
 package com.revature.team4.beans.apiResponseDAO.propertiesList;
 
+/**
+ * A mid-level model object of data from hotels API response
+ */
 public class ListBodyDAO {
     private String header;
     private ListSearchResultsDAO searchResults;

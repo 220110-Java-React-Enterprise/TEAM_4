@@ -4,6 +4,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Map;
 
+/**
+ * The lowest-level model object of data from hotels API response
+ * Shows fields such as hotel name, star rating, and current price
+ */
 public class ListResultDAO {
     private Long id;
     private String name;

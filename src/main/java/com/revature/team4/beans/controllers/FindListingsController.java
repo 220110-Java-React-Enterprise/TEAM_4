@@ -17,11 +17,22 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Properties;
 
-
+/**
+ * handles requests to and responses from third-party hotels API
+ * contains GET method for hotels and hotel photos
+ */
 @RestController
 @RequestMapping("/location_listings")
 public class FindListingsController {
 
+    /**
+     *
+     * @param query - takes in a location ID
+     * @return - hotel listings for given location, in the form of an arraylist
+     *
+     * this is the core of interacting with API -
+     * the API response is picked at little by little until we get to the data we want
+     */
     @RequestMapping(method = RequestMethod.GET, value="/{query}")
     public ArrayList<ListResultDAO> findListings(@PathVariable String query){
         //Get api key from properties file
@@ -61,6 +72,12 @@ public class FindListingsController {
     return null;
     }
 
+    /**
+     *
+     * @param query
+     * @return - hotel photo object
+     *
+     */
     @RequestMapping(method = RequestMethod.GET, value="/photos/{query}")
     public PhotosResponseDAO findPhotos(@PathVariable String query) {
         //Get api key from properties file

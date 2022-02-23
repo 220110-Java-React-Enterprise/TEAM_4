@@ -1,5 +1,9 @@
 package com.revature.team4.beans.apiResponseDAO.locations;
 
+/**
+ * The lowest-level model object of data taken from locations API
+ * containing information such as name, latitude/longitude, and whether it is a city or neighborhood
+ */
 public class LocationEntityDAO {
 
     public String geoId;

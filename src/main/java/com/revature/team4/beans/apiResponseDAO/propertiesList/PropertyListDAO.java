@@ -1,5 +1,8 @@
 package com.revature.team4.beans.apiResponseDAO.propertiesList;
 
+/**
+ * The highest-level model object of data from hotels API response
+ */
 public class PropertyListDAO {
     private String result;
     private ListDataDAO data;

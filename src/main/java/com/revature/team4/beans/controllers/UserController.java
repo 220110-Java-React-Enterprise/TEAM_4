@@ -15,6 +15,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
 
+/**
+ * handles requests/responses regarding User persistence data
+ * contains POST, GET, UPDATE and DELETE methods
+ * sends commands to User and Booking repositories
+ */
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -22,22 +27,34 @@ public class UserController {
     public final UserRepo userRepo;
     public final BookingRepo bookingRepo;
 
-    //Autowired constructor; Spring injects implementation of repo interfaces
+    /**
+     * Autowired constructor; Spring injects implementation of repo interfaces
+     *
+     * @param userRepo
+     * @param bookingRepo
+     */
     @Autowired
     public UserController(UserRepo userRepo, BookingRepo bookingRepo) {
         this.userRepo = userRepo;
         this.bookingRepo = bookingRepo;
     }
 
-    //Method to return list of all users in database
-    //Mapped to the controller's GET method for the /all path
+    /**
+     * Mapped to the controller's GET method for the /all path
+     *
+     * @return - list of all users in database
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/all")
     public List<User> getAllUsers(){
     return userRepo.findAll();
     }
 
-    //Method to return specific user by id
-    //Mapped to controller's GET method for /{userId} path
+    /**
+     * Mapped to controller's GET method for /{userId} path
+     *
+     * @param userId
+     * @return - specific user by id
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/{userId}")
     public User getUserByID(@PathVariable Integer userId) {
         Optional<User> optionalUser = userRepo.findById(userId);
@@ -47,9 +64,16 @@ public class UserController {
         return null;
     }
 
-    //Method to check if a user exists in a database with matching email and password
-    //Returns null if user was not found
-    //Mapped to the controller's GET method
+
+    /**
+     * Checks if a user exists in a database with matching email and password
+     * Mapped to the controller's GET method
+     *
+     * @param email
+     * @param password
+     * @return - if email and password match/found: user object
+     *         - not found: null
+     */
     @RequestMapping(method = RequestMethod.GET)
     public User login(@RequestParam String email, @RequestParam String password) {
         //Gather all users from database
@@ -72,8 +96,13 @@ public class UserController {
         return null;
     }
 
-    //Method to attempt storing a given User object in appropriate table
-    //Mapped to the controller's POST method
+    /**
+     * attempt storing a given User object in appropriate table
+     * Mapped to the controller's POST method
+     *
+     * @param user
+     * @return - return the User object
+     */
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.ACCEPTED)
     public User newUser(@RequestBody User user) {

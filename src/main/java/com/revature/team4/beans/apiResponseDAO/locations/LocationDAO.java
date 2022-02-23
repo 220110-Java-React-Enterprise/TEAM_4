@@ -2,6 +2,9 @@ package com.revature.team4.beans.apiResponseDAO.locations;
 
 import java.util.Arrays;
 
+/**
+ * Most high-level model of data received from locations API
+ */
 public class LocationDAO {
     public String term;
     public Integer moresuggestions;
