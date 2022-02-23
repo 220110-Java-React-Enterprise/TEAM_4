@@ -10,21 +10,22 @@ h1 {
 }
 div{
     margin: 30px;
-    font-size: 150%;
+    font-size: 120%;
 }
 
 #locationSearch {
     text-align: left;
+    font-weight: bold;
 }
 
 #userBookings{
     text-align: left;
+    font-weight: bold;
 }
 
 
 .navigation{
     width: 50%;
-    float: left;
     padding: 20px;
     border: 2px solid red;
     background: rgba(225, 225, 225, 0.5);
@@ -36,4 +37,3 @@ div{
     background-color: DarkSalmon;
     color: black;
   }
-  
