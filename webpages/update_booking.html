@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <link rel="stylesheet" href="base.css">
     <title>Update Booking</title>
 </head>
 
@@ -27,7 +28,7 @@
 
             try {
                 let json = await response.json();
-                
+
                 hotel.hotelId = json.hotelId;
                 hotel.name = json.name;
                 hotel.starRating = json.starRating;
@@ -40,11 +41,11 @@
                 document.getElementById("hotelName").innerHTML = "Hotel name: " + json.name;
                 document.getElementById("starRating").innerHTML = "Hotel star rating: " + json.starRating;
                 document.getElementById("currentPrice").innerHTML = "Hotel current price: " + json.currentPrice;
-                
+
                 document.getElementById("start").value = startDate;
                 document.getElementById("end").value = endDate;
 
-                document.getElementById("updateButton").setAttribute("onclick", "updateBooking(" 
+                document.getElementById("updateButton").setAttribute("onclick", "updateBooking("
                     + userId + "," + bookingId + ")");
                 console.log("Success?");
             } catch (error) {
@@ -84,17 +85,20 @@
 
         loadBooking();
     </script>
+    <div class="block">
 
-    <div id="hotelName"></div>
-    <div id="starRating"></div>
-    <div id="currentPrice"></div>
-    <form>
-        <label for="start">Start date:</label>
-        <input type="date" id="start" name="start">
-        <label for="end">End date:</label>
-        <input type="date" id="end" name="end">
-        <input class="inputButton" id="updateButton" name="update" type="button" onclick="updateBooking()" value="Update">
-    </form>
+        <div id="hotelName"></div>
+        <div id="starRating"></div>
+        <div id="currentPrice"></div>
+        <form>
+            <label for="start">Start date:</label>
+            <input type="date" id="start" name="start">
+            <label for="end">End date:</label>
+            <input type="date" id="end" name="end">
+            <input class="inputButton" id="updateButton" name="update" type="button" onclick="updateBooking()"
+                value="Update">
+        </form>
+    </div>
 </body>
 
 </html>

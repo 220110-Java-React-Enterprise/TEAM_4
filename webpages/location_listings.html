@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <link rel="stylesheet" href="base.css">
     <title>Hotel Results</title>
 </head>
 
@@ -16,7 +17,7 @@
         }
 
         async function searchHotels() {
-            
+
             let url = "http://localhost:8080/location_listings/";
             let currentUrl = window.location.href;
 
@@ -91,20 +92,22 @@
         searchHotels();
     </script>
 
-    <h1>Hotels Found</h1>
-    <label for="start">Start date:</label>
-    <input type="date" id="start" name="start" value="2000-01-01">
-    <label for="end">End date:</label>
-    <input type="date" id="end" name="end" value="2000-01-01">
+    <div class="block">
+        <h1>Hotels Found</h1>
+        <label for="start">Start date:</label>
+        <input type="date" id="start" name="start" value="2000-01-01">
+        <label for="end">End date:</label>
+        <input type="date" id="end" name="end" value="2000-01-01">
 
-    <table id="resultsTable">
-        <tr>
-            <th>Name</th>
-            <th>Star Rating</th>
-            <th>Current Price</th>
-            <th>Book It Now</th>
-        </tr>
-    </table>
+        <table id="resultsTable">
+            <tr>
+                <th>Name</th>
+                <th>Star Rating</th>
+                <th>Current Price</th>
+                <th>Book It Now</th>
+            </tr>
+        </table>
+    </div>
     <script>
         loadCurrentDate();
     </script>
