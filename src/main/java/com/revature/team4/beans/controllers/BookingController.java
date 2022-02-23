@@ -32,7 +32,8 @@ public class BookingController {
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void newBooking(@RequestBody Booking booking, @PathVariable Integer userId, @RequestParam("startDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date startDate,
+    public void newBooking(@RequestBody Booking booking, @PathVariable Integer userId,
+                           @RequestParam("startDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date startDate,
                            @RequestParam("endDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date endDate) throws Exception {
         Optional<User> optionalUser = userRepo.findById(userId);
         List<ListResultDAO> lRD = DataStore.getCurrentListingsResults();
@@ -43,8 +44,10 @@ public class BookingController {
                 if(booking.getHotelId().equals(lRD.get(i).getId())){
                     booking.setName(lRD.get(i).getName());
                     booking.setStarRating(lRD.get(i).getStarRating());
+
                     booking.setStartDate(startDate);
                     booking.setEndDate(endDate);
+
                     user.addBooking(booking);
                     bookingRepo.save(booking);
                     userRepo.save(user);
@@ -85,9 +88,13 @@ public class BookingController {
     }
 
     @RequestMapping(value = "/{bookingId}", method = RequestMethod.PUT)
-    public void updateBooking(@RequestBody Booking updateBooking, @PathVariable Integer bookingId) {
+    public void updateBooking(@RequestBody Booking updateBooking, @PathVariable Integer bookingId,
+                              @RequestParam("startDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date startDate,
+                              @RequestParam("endDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date endDate) {
         Optional<Booking> optionalBooking = bookingRepo.findById(bookingId);
         if(optionalBooking.isPresent() && updateBooking.getBookingId().equals(bookingId)) {
+            updateBooking.setStartDate(startDate);
+            updateBooking.setEndDate(endDate);
             bookingRepo.save(updateBooking);
         }
     }
@@ -98,10 +105,12 @@ public class BookingController {
         if(optionalUser.isPresent()) {
             User user = optionalUser.get();
             for (Booking b : user.getBookings()) {
-                user.removeBooking(b);
-                bookingRepo.delete(b);
-                userRepo.save(user);
-                break;
+                if(bookingId.equals(b.getBookingId())) {
+                    user.removeBooking(b);
+                    bookingRepo.delete(b);
+                    userRepo.save(user);
+                    break;
+                }
             }
         }
     }

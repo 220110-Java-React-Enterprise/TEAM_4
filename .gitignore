@@ -39,3 +39,4 @@ api-key.properties
 admin.properties
 /target/
 /target/classes/com/
+/src/main/resources/Exception_Logs/

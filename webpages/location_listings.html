@@ -7,7 +7,16 @@
 
 <body>
     <script>
+        function loadCurrentDate() {
+            let today = new Date().toISOString().substring(0, 10);
+            console.log(today);
+
+            document.getElementById("start").value = today;
+            document.getElementById("end").value = today;
+        }
+
         async function searchHotels() {
+            
             let url = "http://localhost:8080/location_listings/";
             let currentUrl = window.location.href;
 
@@ -35,9 +44,9 @@
                             element.id + "," +
                             "\'" + element.name + "\'," +
                             element.starRating + "," +
-                            "\'" + element.currentPrice + "\'" +
-                            ")\" " +
-                            "value=\"Book it now\"></td></tr>"
+                            "\'" + element.currentPrice + "\'," +
+                            element.exactCurrentPrice +
+                            ")\" value=\"Book it now\"></td></tr>"
                         );
                 }
             } else {
@@ -45,7 +54,7 @@
             }
         }
 
-        async function bookHotel(clickedId, clickedName, clickedStarRating, clickedCurrentPrice) {
+        async function bookHotel(clickedId, clickedName, clickedStarRating, clickedCurrentPrice, clickedExactCurrentPrice) {
             let params = (new URL(document.location)).searchParams;
             let userId = params.get("userId");
             let url = "http://localhost:8080/users/" + userId + "/bookings";
@@ -60,7 +69,8 @@
                 hotelId: clickedId,
                 name: clickedName,
                 starRating: clickedStarRating,
-                currentPrice: clickedCurrentPrice
+                currentPrice: clickedCurrentPrice,
+                exactCurrentPrice: clickedExactCurrentPrice
             }
             let response = await fetch(urlWithParams, {
                 method: 'POST',
@@ -77,14 +87,15 @@
                 alert("Reservation Good.");
             }
         }
+
         searchHotels();
     </script>
 
-    <h1>Date goes here</h1>
+    <h1>Hotels Found</h1>
     <label for="start">Start date:</label>
-    <input type="date" id="start" name="trip-start">
+    <input type="date" id="start" name="start" value="2000-01-01">
     <label for="end">End date:</label>
-    <input type="date" id="end" name="trip-end">
+    <input type="date" id="end" name="end" value="2000-01-01">
 
     <table id="resultsTable">
         <tr>
@@ -92,15 +103,11 @@
             <th>Star Rating</th>
             <th>Current Price</th>
             <th>Book It Now</th>
-            <!-- <tr id="2234464608">
-                    <td><a href="hotel_listing.html?userId=1&hotelId=2234464608">Super Lake Hotel</a></td>
-                    <td>0</td>
-                    <td>$69</td>
-                    <td><input class="inputButton" id="search" name="search" type="button" 
-                        onclick="bookHotel(2234464608,'Super Lake Hotel',0,'$69')" value="Book it now"></td>
-                </tr> -->
         </tr>
     </table>
+    <script>
+        loadCurrentDate();
+    </script>
 </body>
 
 </html>

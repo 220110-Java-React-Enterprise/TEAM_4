@@ -17,6 +17,10 @@ public class Booking {
     private String name;
     @Column
     private Integer starRating;
+    @Column
+    private String currentPrice;
+    @Column
+    private Double exactCurrentPrice;
 
     @Column
     private Date startDate;
@@ -63,6 +67,22 @@ public class Booking {
 
     public void setStarRating(Integer starRating) {
         this.starRating = starRating;
+    }
+
+    public String getCurrentPrice() {
+        return currentPrice;
+    }
+
+    public void setCurrentPrice(String currentPrice) {
+        this.currentPrice = currentPrice;
+    }
+
+    public Double getExactCurrentPrice() {
+        return exactCurrentPrice;
+    }
+
+    public void setExactCurrentPrice(Double exactCurrentPrice) {
+        this.exactCurrentPrice = exactCurrentPrice;
     }
 
     public Date getStartDate() {
