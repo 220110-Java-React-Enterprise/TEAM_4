@@ -35,22 +35,18 @@ public class BookingController {
                            @RequestParam("startDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date startDate,
                            @RequestParam("endDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date endDate) throws Exception {
         Optional<User> optionalUser = userRepo.findById(userId);
-        List<ListResultDAO> lRD = DataStore.getCurrentListingsResults();
 
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
-            for(int i = 0; i < lRD.size(); i++){
-                if(booking.getHotelId().equals(lRD.get(i).getId())){
-                    //Set the start and end date to what was passed in as request parameters
-                    booking.setStartDate(startDate);
-                    booking.setEndDate(endDate);
 
-                    //Add booking to user list and save to database
-                    user.addBooking(booking);
-                    bookingRepo.save(booking);
-                    userRepo.save(user);
-                }
-            }
+            //Set the start and end date to what was passed in as request parameters
+            booking.setStartDate(startDate);
+            booking.setEndDate(endDate);
+
+            //Add booking to user list and save to database
+            user.addBooking(booking);
+            bookingRepo.save(booking);
+            userRepo.save(user);
         } else {
             throw new Exception("User not found...");
         }
