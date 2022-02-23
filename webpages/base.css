@@ -8,3 +8,10 @@ div.block {
     padding: 8px;
     background: rgba(225, 225, 225, 0.75);
 }
+
+#footer-container {
+    text-align: center;
+    padding: 3px;
+    background-color: DarkSalmon;
+    color: black;
+  }

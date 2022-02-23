@@ -51,6 +51,7 @@ th:nth-child(3), td:nth-child(3) {
     position: relative;
 }
 
+
 .input {
     border: 3px solid;
     font-size: 150%;
@@ -81,4 +82,11 @@ th:nth-child(3), td:nth-child(3) {
     /*background-image: url("ResourcesRoot/new_york_city_river_bridge_skyline.jpg");
     color: #cccccc;
     */
+}
+
+#footer-container {
+  text-align: center;
+  padding: 3px;
+  background-color: DarkSalmon;
+  color: black;
 }
