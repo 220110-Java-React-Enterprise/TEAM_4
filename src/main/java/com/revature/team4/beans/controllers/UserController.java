@@ -18,20 +18,26 @@ import java.util.Properties;
 @RestController
 @RequestMapping("/users")
 public class UserController {
+    //Repository objects that allow controller methods to access user and booking database tables
     public final UserRepo userRepo;
     public final BookingRepo bookingRepo;
 
+    //Autowired constructor; Spring injects implementation of repo interfaces
     @Autowired
     public UserController(UserRepo userRepo, BookingRepo bookingRepo) {
         this.userRepo = userRepo;
         this.bookingRepo = bookingRepo;
     }
 
+    //Method to return list of all users in database
+    //Mapped to the controller's GET method for the /all path
     @RequestMapping(method = RequestMethod.GET, value = "/all")
     public List<User> getAllUsers(){
     return userRepo.findAll();
     }
 
+    //Method to return specific user by id
+    //Mapped to controller's GET method for /{userId} path
     @RequestMapping(method = RequestMethod.GET, value = "/{userId}")
     public User getUserByID(@PathVariable Integer userId) {
         Optional<User> optionalUser = userRepo.findById(userId);
@@ -41,14 +47,20 @@ public class UserController {
         return null;
     }
 
+    //Method to check if a user exists in a database with matching email and password
+    //Returns null if user was not found
+    //Mapped to the controller's GET method
     @RequestMapping(method = RequestMethod.GET)
     public User login(@RequestParam String email, @RequestParam String password) {
+        //Gather all users from database
         List<User> users = userRepo.findAll();
 
         for (int index = 0; index < users.size(); index++) {
+            //Iterate through users and find user with matching email
             if (users.get(index).getEmail().equals(email)) {
+                //If user was found, check if password matches; return user if so, null if not
                 if (users.get(index).getPassword().equals(password)) {
-                    DataStore.setCurrentUser(users.get(index));
+                    DataStore.setCurrentUser(users.get(index)); //Can probably eliminate this line
                     return users.get(index);
                 } else {
                     return null;
@@ -56,28 +68,37 @@ public class UserController {
             }
         }
 
+        //Return null if user was not found in database
         return null;
     }
 
+    //Method to attempt storing a given User object in appropriate table
+    //Mapped to the controller's POST method
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.ACCEPTED)
     public User newUser(@RequestBody User user) {
         try {
             return userRepo.save(user);
         } catch (Exception e) {
+            //Log exception and return null if user could not be added to table
             ExceptionLogger.getExceptionLogger().log(e);
             return null;
         }
     }
 
+    //Method to attempt updating a given User object in appropriate table
+    //Mapped to the controller's PUT method
     @RequestMapping(method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void updateUser(@RequestBody User user) { userRepo.save(user); }
 
+    //Method to attempt deletion of a given User object in appropriate table
     @RequestMapping(method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.OK)
     public void deleteUser(@RequestBody User user) {
         Optional<User> optionalUser = userRepo.findById(user.getUserId());
+
+        //Delete user bookings and user if found in database
         optionalUser.ifPresent(value -> bookingRepo.deleteAll(value.getBookings()));
         userRepo.delete(user);
     }
@@ -98,6 +119,7 @@ public class UserController {
     }
 
     //Method to automatically generate admin account every time the application starts if it does not exist
+    //Mapped to controller's POST method with /admin path
     @RequestMapping(method = RequestMethod.POST, value="/admin")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void createAdmin() {
@@ -123,6 +145,7 @@ public class UserController {
     }
 
     //Method to check if a given user is an admin
+    //Mapped to controller's GET method with /admin/{userId} path
     @RequestMapping(method = RequestMethod.GET, value="/admin/{userId}")
     public Boolean isAdmin(@PathVariable Integer userId) {
         //Attempt to load user from database

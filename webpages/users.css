@@ -1,6 +1,7 @@
 body {
     background-image: url("Spello_and_Flowers_in_Alleyway_Italy_ngi5pr.png");
     background-size: cover;
+    font-family: Arial, Helvetica, sans-serif
 }
 
 h1 {
@@ -26,5 +27,5 @@ div{
     float: left;
     padding: 20px;
     border: 2px solid red;
-    background-color: white;
+    background: rgba(225, 225, 225, 0.5);
 }

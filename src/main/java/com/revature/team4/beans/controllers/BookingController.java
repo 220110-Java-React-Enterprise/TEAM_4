@@ -19,7 +19,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/users/{userId}/bookings")
 public class BookingController {
-    FindListingsController findListingsController = new FindListingsController();
 
     public final BookingRepo bookingRepo;
     public final UserRepo userRepo;
@@ -36,23 +35,18 @@ public class BookingController {
                            @RequestParam("startDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date startDate,
                            @RequestParam("endDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date endDate) throws Exception {
         Optional<User> optionalUser = userRepo.findById(userId);
-        List<ListResultDAO> lRD = DataStore.getCurrentListingsResults();
 
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
-            for(int i = 0; i < lRD.size(); i++){
-                if(booking.getHotelId().equals(lRD.get(i).getId())){
-                    booking.setName(lRD.get(i).getName());
-                    booking.setStarRating(lRD.get(i).getStarRating());
 
-                    booking.setStartDate(startDate);
-                    booking.setEndDate(endDate);
+            //Set the start and end date to what was passed in as request parameters
+            booking.setStartDate(startDate);
+            booking.setEndDate(endDate);
 
-                    user.addBooking(booking);
-                    bookingRepo.save(booking);
-                    userRepo.save(user);
-                }
-            }
+            //Add booking to user list and save to database
+            user.addBooking(booking);
+            bookingRepo.save(booking);
+            userRepo.save(user);
         } else {
             throw new Exception("User not found...");
         }
