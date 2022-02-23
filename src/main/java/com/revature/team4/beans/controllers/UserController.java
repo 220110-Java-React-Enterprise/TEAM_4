@@ -44,7 +44,7 @@ public class UserController {
         if (optionalUser.isPresent()) {
             return optionalUser.get();
         }
-        return null;
+        return null;000000
     }
 
     //Method to check if a user exists in a database with matching email and password
