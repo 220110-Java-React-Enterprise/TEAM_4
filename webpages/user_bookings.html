@@ -16,18 +16,21 @@
                 try {
                     let json = await response.json();
 
-                    let tmpHtml = "<tr><th>Hotel Name</th><th>Cancel Booking</th></tr>";
+                    let tmpHtml = "<tr><th>Hotel Name</th><th>Start Date</th><th>End Date</th><th>Update Booking</th><th>Cancel Booking</th></tr>";
                     for (element of json) {
                         console.log(element);
                         
                         tmpHtml = tmpHtml.concat("<tr id=\"" + element.bookingId + "\"><td>" + element.name +
+                            "</td><td>" + element.startDate.substring(0, 10) + "</td><td>" + element.endDate.substring(0, 10) + "</td>" +
+                            "<td><a href=\"update_booking.html?userId=" + userId + "&bookingId=" + element.bookingId + 
+                            "\">Update</a></td>" +
                             "<td><input class=\"inputButton\" type=\"button\" onclick=\"cancelBooking(" +
                             userId + "," + element.bookingId + ")\" value=\"Cancel\"></td></tr>");
                     }
 
                     document.getElementById("resultsTable").innerHTML = tmpHtml;
                 } catch (error) {
-                    alert("Error: user has no current bookings.")
+                    alert("Error: user has no current bookings.");
                 }
             }
 

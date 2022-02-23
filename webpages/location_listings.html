@@ -35,7 +35,8 @@
                             element.id + "," +
                             "\'" + element.name + "\'," +
                             element.starRating + "," +
-                            "\'" + element.currentPrice + "\'" +
+                            "\'" + element.currentPrice + "\'," +
+                            element.exactCurrentPrice +
                             ")\" " +
                             "value=\"Book it now\"></td></tr>"
                         );
@@ -45,7 +46,7 @@
             }
         }
 
-        async function bookHotel(clickedId, clickedName, clickedStarRating, clickedCurrentPrice) {
+        async function bookHotel(clickedId, clickedName, clickedStarRating, clickedCurrentPrice, clickedExactCurrentPrice) {
             let params = (new URL(document.location)).searchParams;
             let userId = params.get("userId");
             let url = "http://localhost:8080/users/" + userId + "/bookings";
@@ -60,7 +61,8 @@
                 hotelId: clickedId,
                 name: clickedName,
                 starRating: clickedStarRating,
-                currentPrice: clickedCurrentPrice
+                currentPrice: clickedCurrentPrice,
+                exactCurrentPrice: clickedExactCurrentPrice
             }
             let response = await fetch(urlWithParams, {
                 method: 'POST',
