@@ -19,7 +19,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/users/{userId}/bookings")
 public class BookingController {
-    FindListingsController findListingsController = new FindListingsController();
 
     public final BookingRepo bookingRepo;
     public final UserRepo userRepo;
@@ -42,12 +41,11 @@ public class BookingController {
             User user = optionalUser.get();
             for(int i = 0; i < lRD.size(); i++){
                 if(booking.getHotelId().equals(lRD.get(i).getId())){
-                    booking.setName(lRD.get(i).getName());
-                    booking.setStarRating(lRD.get(i).getStarRating());
-
+                    //Set the start and end date to what was passed in as request parameters
                     booking.setStartDate(startDate);
                     booking.setEndDate(endDate);
 
+                    //Add booking to user list and save to database
                     user.addBooking(booking);
                     bookingRepo.save(booking);
                     userRepo.save(user);
