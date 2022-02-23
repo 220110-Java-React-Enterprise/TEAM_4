@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Location Search</title>
+</head>
+
+<body>
+    <link rel="stylesheet" href="styles.css">
+
+    <script type="text/javascript">
+        async function searchLocation() {
+
+            let url = "http://localhost:8080/locations/";
+            let query = document.getElementById("locationSearch").value;
+
+            let urlWithParam = url + query;
+            let response = await fetch(urlWithParam);
+            let text = await response.json();
+
+            let params = (new URL(document.location)).searchParams;
+            let userId = params.get("userId");
+
+            if (text) {
+                for (element of text) {
+                    console.log(element);
+                    let destinationId = element.destinationId;
+                    let tmpUrl = "location_listings.html?userId=" + userId +
+                        "&destinationId=" + destinationId;
+
+                    document.getElementById("resultsTable").innerHTML =
+                        document.getElementById("resultsTable").innerHTML.concat(
+                            "<tr><td>" + element.type + "</td>" +
+                            "<td><a href=\"" + tmpUrl + "\">" + element.name + "</a></td>" +
+                            "<td>" + element.caption + "</td></tr>"
+                        );
+                }
+            } else {
+                alert("Error: search failed.");
+            }
+        }
+    </script>
+
+
+    <div class="wrap">
+        <img class="bg" src="ResourcesRoot/new_york_city_river_bridge_skyline.jpg" alt="">
+
+        <div class="form">
+            <form>
+                <input class="input" id="locationSearch" name="locationSearch" type="text"
+                    placeholder="Choose your destination">
+                <input class="inputButton" id="search" name="search" type="button" onclick="searchLocation()"
+                    value="Search">
+            </form>
+        </div>
+
+        <table id="resultsTable" class="table">
+
+            <tr>
+                <th>Type</th>
+                <th>Name</th>
+                <th>Caption</th>
+            </tr>
+            <tr></tr>
+        </table>
+
+    </div>
+    <div id="footer-container">
+        <footer class="footer">
+            <h6>Devoplers: Brandon Perrien | Brian Gardner | Donald Farrar | Mark W Young</h6>
+        </footer>
+    </div>
+</body>
+
+</html>

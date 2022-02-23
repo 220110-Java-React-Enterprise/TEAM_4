@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="base.css">
+    <title>Update Booking</title>
+</head>
+
+<body>
+    <script>
+        var hotel = {
+            hotelId: 0,
+            name: "",
+            starRating: 0,
+            currentPrice: "",
+            exactCurrentPrice: 0
+        }
+
+        async function loadBooking() {
+            let currentUrl = window.location.href;
+            let params = (new URL(document.location)).searchParams;
+            let userId = params.get("userId");
+            let bookingId = params.get("bookingId");
+
+            let requestUrl = "http://localhost:8080/users/" + userId + "/bookings/" + bookingId;
+            console.log(requestUrl);
+            let response = await fetch(requestUrl);
+
+            try {
+                let json = await response.json();
+
+                hotel.hotelId = json.hotelId;
+                hotel.name = json.name;
+                hotel.starRating = json.starRating;
+                hotel.currentPrice = json.currentPrice;
+                hotel.exactCurrentPrice = json.exactCurrentPrice;
+
+                let startDate = json.startDate.substring(0, 10);
+                let endDate = json.endDate.substring(0, 10);
+
+                document.getElementById("hotelName").innerHTML = "Hotel name: " + json.name;
+                document.getElementById("starRating").innerHTML = "Hotel star rating: " + json.starRating;
+                document.getElementById("currentPrice").innerHTML = "Hotel current price: " + json.currentPrice;
+
+                document.getElementById("start").value = startDate;
+                document.getElementById("end").value = endDate;
+
+                document.getElementById("updateButton").setAttribute("onclick", "updateBooking("
+                    + userId + "," + bookingId + ")");
+                console.log("Success?");
+            } catch (error) {
+                alert("Error: could not load booking");
+            }
+        }
+
+        async function updateBooking(userId, bookingId) {
+            let startDate = document.getElementById("start").value;
+            let endDate = document.getElementById("end").value;
+            let requestUrl = "http://localhost:8080/users/" + userId + "/bookings/" + bookingId +
+                "?startDate=" + startDate + "&endDate=" + endDate;
+
+            let bookingObj = {
+                bookingId: bookingId,
+                hotelId: hotel.hotelId,
+                name: hotel.name,
+                starRating: hotel.starRating,
+                currentPrice: hotel.currentPrice,
+                exactCurrentPrice: hotel.exactCurrentPrice
+            }
+            let response = await fetch(requestUrl, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify(bookingObj)
+            });
+            let text = await response.text();
+            console.log(text);
+            if (text) {
+                alert('Update Failed!');
+            } else {
+                alert('Update succeeded!');
+            }
+        }
+
+        loadBooking();
+    </script>
+    <div class="block">
+
+        <div id="hotelName"></div>
+        <div id="starRating"></div>
+        <div id="currentPrice"></div>
+        <form>
+            <label for="start">Start date:</label>
+            <input type="date" id="start" name="start">
+            <label for="end">End date:</label>
+            <input type="date" id="end" name="end">
+            <input class="inputButton" id="updateButton" name="update" type="button" onclick="updateBooking()"
+                value="Update">
+        </form>
+    </div>
+    <div id="footer-container">
+        <footer class="footer">
+            <h6>Devoplers: Brandon Perrien | Brian Gardner | Donald Farrar | Mark W Young</h6>
+        </footer>
+    </div>
+</body>
+
+</html>

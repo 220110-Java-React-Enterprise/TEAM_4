@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="base.css">
+    <title>User Bookings</title>
+</head>
+
+<body>
+    <script>
+        async function getBookings() {
+            let url = "http://localhost:8080/users/";
+            let currentUrl = window.location.href;
+            let params = (new URL(document.location)).searchParams;
+            let userId = params.get("userId");
+            let urlWithParam = url + userId + "/bookings";
+
+            let response = await fetch(urlWithParam);
+            try {
+                let json = await response.json();
+
+                let tmpHtml = "<tr><th>Hotel Name</th><th>Start Date</th><th>End Date</th><th>Update Booking</th><th>Cancel Booking</th></tr>";
+                for (element of json) {
+                    tmpHtml = tmpHtml.concat("<tr id=\"" + element.bookingId + "\"><td>" + element.name +
+                        "</td><td>" + element.startDate.substring(0, 10) + "</td><td>" + element.endDate.substring(0, 10) + "</td>" +
+                        "<td><a href=\"update_booking.html?userId=" + userId + "&bookingId=" + element.bookingId +
+                        "\">Update</a></td>" +
+                        "<td><input class=\"inputButton\" type=\"button\" onclick=\"cancelBooking(" +
+                        userId + "," + element.bookingId + ")\" value=\"Cancel\"></td></tr>");
+                }
+
+                document.getElementById("resultsTable").innerHTML = tmpHtml;
+            } catch (error) {
+                alert("Error: user has no current bookings.");
+            }
+        }
+
+        async function cancelBooking(userId, bookingId) {
+            let url = "http://localhost:8080/users/" + userId + "/bookings/" + bookingId;
+
+            let response = await fetch(url, {
+                method: 'DELETE'
+            });
+
+            await getBookings();
+        }
+
+        getBookings();
+    </script>
+    <div class="block">
+        <table id="resultsTable">
+    </div>
+    </table>
+    <div id="footer-container">
+        <footer class="footer">
+            <h6>Devoplers: Brandon Perrien | Brian Gardner | Donald Farrar | Mark W Young</h6>
+        </footer>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="base.css">
+        <title>All Bookings</title>
+    </head>
+    <body>
+        <script>
+            async function getAllBookings() {
+                let url = "http://localhost:8080/users/";
+                let currentUrl = window.location.href;
+                let params = (new URL(document.location)).searchParams;
+                let adminId = params.get("adminId");
+                let urlWithParam = url + adminId + "/bookings/all";
+                let response = await fetch(urlWithParam);
+                try {
+                    let json = await response.json();
+                    let tmpHtml = "<tr><th>Hotel Name</th></tr>";
+                    for (let element of json) {
+                        console.log(element);
+                        tableRow = "<tr><td>" +  element.name + "</td></tr>";
+                        console.log(tableRow);
+                        tmpHtml = tmpHtml.concat(tableRow);
+                    }
+                    document.getElementById("resultsTable").innerHTML = tmpHtml;
+                } catch (error) {
+                    alert("Error: no current bookings found.")
+                }
+            }
+            getAllBookings();
+        </script>
+        <div class="block">
+            <table id="resultsTable" class="table"></table>
+        </div>
+        </table>
+    </body>
+    <div id="footer-container">
+        <footer class="footer">
+            <h6>Devoplers: Brandon Perrien | Brian Gardner | Donald Farrar | Mark W Young</h6>
+        </footer>
+    </div>
+</html>

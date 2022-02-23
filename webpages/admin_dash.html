@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="base.css">
+        <title>Admin Dashboard</title>
+        <script src="admin.js"></script>
+    </head>
+    <body>
+        <script>
+            checkIfAdmin();
+
+            async function loadAdminInfo() {
+                let params = (new URL(document.location)).searchParams;
+                let userId = params.get("userId");
+
+                document.getElementById("getAllBookings").innerHTML =
+                    "<a href=\"admin_all_bookings.html?adminId=" + userId + "\">See All Bookings</a>";
+                document.getElementById("getBookingsByUser").innerHTML =
+                    "<a href=\"admin_user_bookings.html?adminId=" + userId + "\">See All Bookings By User</a>";
+                document.getElementById("getAllUsers").innerHTML =
+                    "<a href=\"admin_all_users.html?adminId=" + userId + "\">See All Users</a>";
+            }
+        </script>
+        <div class="block">
+            <h1>Bed, Breakfast and Java</h1>
+            <h2>Admin Dashboard</h2>
+            <div id="getAllBookings" class="block">
+            
+            </div>
+            <div id="getBookingsByUser" class="block">
+    
+            </div>
+            <div id="getAllUsers" class="block">
+    
+            </div>
+        </div>
+
+        <script>
+            loadAdminInfo();
+        </script>
+     <div id="footer-container">
+        <footer class="footer">
+            <h6>Devoplers: Brandon Perrien | Brian Gardner | Donald Farrar | Mark W Young</h6>
+        </footer>
+    </div>
+
+    </body>
+</html>

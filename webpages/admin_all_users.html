@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="base.css">
+        <title>User Info</title>
+    </head>
+    <body>
+        <script>
+            async function userInformation(){
+                let url = "http://localhost:8080/users/";
+                let currentUrl = window.location.href;
+                let params = (new URL(document.location)).searchParams;
+                let adminId = params.get("adminId");
+                let userId = params.get("userId");
+                let urlWithParam = url + "all";
+                let response = await fetch(urlWithParam);
+                try{
+                    let json = await response.json();
+                    let tmpHtml = "<tr><th>User ID</th><th>Email</th><th>Admin</th><th>See all bookings</th></tr>";
+                    for (let element of json) {
+                        tableRow = 
+                        "<tr><td>" + element.userId + "</td>" +
+                        "<td>" + element.email + "</td>" +
+                        "<td>" + element.admin + "</td>" + 
+                        "<td>" + "<a href=\"admin_user_bookings.html?adminId=" + adminId + "&userId=" + element.userId + "\">See all bookings!</a>" + "</td></tr>";
+                        tmpHtml = tmpHtml.concat(tableRow);
+                    }
+                    document.getElementById("resultsTable").innerHTML = tmpHtml;
+                } catch (error) {
+                    alert("Error: no current user found.")
+                }
+            }
+            userInformation();
+        </script>
+        <div class="block">
+            <table id="resultsTable" class="table">
+            </table>
+        </div>
+        <div id="footer-container">
+            <footer class="footer">
+                <h6>Devoplers: Brandon Perrien | Brian Gardner | Donald Farrar | Mark W Young</h6>
+            </footer>
+        </div>
+    </body>
+</html>

@@ -17,31 +17,22 @@ public class User {
     @Column
     private String password;
 
+    @Column
+    private Boolean admin;
 
     @Column
     @OneToMany
     private List<Booking> bookings = new LinkedList<>();
 
-    public List<Booking> getBookings() {
-        return bookings;
-    }
-
-    public void setBookings(List<Booking> bookings) {
-        this.bookings = bookings;
-    }
-
-    public void addBooking(Booking booking){
-        bookings.add(booking);
-    }
-
-    public void removeBooking(Booking booking){
-        bookings.remove(booking);
-    }
-
-
     public User() {
+        this.setAdmin(false);
     }
 
+    public User(String email, String password) {
+        this();
+        this.email = email;
+        this.password = password;
+    }
 
     public Integer getUserId() {
         return userId;
@@ -65,5 +56,30 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Boolean admin) {
+        this.admin = admin;
+    }
+
+
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
+    }
+
+    public void addBooking(Booking booking){
+        bookings.add(booking);
+    }
+
+    public void removeBooking(Booking booking){
+        bookings.remove(booking);
     }
 }

@@ -1,30 +1,52 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>User Registration</title>
-    </head>
-    <body>
-        <script type="text/javascript">
-            async function postUser() {
-                let url = "http://localhost:8080/users";
-                let user = {
-                    email: document.getElementById("email").value,
-                    password: document.getElementById("password").value
-                }
-                let response = await fetch(url, {
-                    method: 'POST',
-                    headers: {
-                        'Content-type': 'application/json;charset=utf-8'
-                    },
-                    body: JSON.stringify(user)
-                })
+
+<head>
+    <link rel="stylesheet" href="base.css">
+    <title>User Registration</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        async function postUser() {
+            let goodUrl = "http://localhost:8080/users";
+            let user = {
+                email: document.getElementById("email").value,
+                password: document.getElementById("password").value
             }
-        </script>
-        <form>
-            <input id="email" name="email" type="text"><br/>
-            <input id="password" name="password" type="password"><br/>
-            <button type="submit" value="submit">Submit</button>
-            <input id="post" name="post" type="button" onclick="postUser()" value="Post">
+            let response = await fetch(goodUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify(user)
+            });
+            let text = await response.text();
+            console.log(text);
+            if (text) {
+                alert('Registration good!');
+                window.location.href = "user_login.html";
+            } else {
+                alert("Error: could not create new user.")
+            }
+        }
+    </script>
+    <div class="block">
+        <h1>Bed, Breakfast & Java</h1>
+        <h2>User Registration</h2>
+        <form method="POST" action="http://localhost:8080/users">
+            <input id="email" name="email" type="text">
+            <label for="email">email</label><br />
+            <input id="password" name="password" type="password">
+            <label for="password">password</label><br />
+            <input id="register" name="register" type="button" onclick="postUser()" value="Register">
         </form>
-    </body>
+    </div>
+    <div id="footer-container">
+        <footer class="footer">
+            <h6>Devoplers: Brandon Perrien | Brian Gardner | Donald Farrar | Mark W Young</h6>
+        </footer>
+    </div>
+</body>
+
 </html>

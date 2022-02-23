@@ -1,0 +1,38 @@
+body {
+    background-image: url("Spello_and_Flowers_in_Alleyway_Italy_ngi5pr.png");
+    background-size: cover;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  color: white;  
+  border-width: 10px, 10px, 10px, 10px;
+}
+div{
+    margin: 30px;
+    font-size: 150%;
+}
+
+#locationSearch {
+    text-align: left;
+}
+
+#userBookings{
+    text-align: left;
+}
+
+
+.navigation{
+    width: 50%;
+    float: left;
+    padding: 20px;
+    border: 2px solid red;
+    background: rgba(225, 225, 225, 0.5);
+}
+
+footer {
+    text-align: center;
+    padding: 3px;
+    background-color: DarkSalmon;
+    color: black;
+  }

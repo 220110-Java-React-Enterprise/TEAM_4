@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="base.css">
+    <title>User Login</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        async function createAdmin() {
+            let url = "http://localhost:8080/users/admin";
+
+            let response = await fetch(url, {
+                method: 'POST'
+            });
+        }
+
+        async function loginFunction() {
+            let goodUrl = "http://localhost:8080/users";
+            let user = {
+                email: document.getElementById("email").value,
+                password: document.getElementById("password").value
+            }
+            let urlWithParam = goodUrl + "?email=" + user.email + "&password=" + user.password;
+            console.log(urlWithParam);
+            let response = await fetch(urlWithParam);
+
+            try {
+                let json = await response.json();
+
+                if (json.admin) {
+                    window.location.href = "admin_dash.html?userId=" + json.userId;
+                } else {
+                    window.location.href = "user_dash.html?userId=" + json.userId;
+                }
+            } catch (error) {
+                alert("Error: login credentials do not match any user.");
+            }
+        }
+
+        async function registration() {
+            window.location.href = "user_registration.html";
+        }
+
+        createAdmin();
+    </script>
+    <div class="block">
+        <h1>Bed, Breakfast and Java</h1>
+        <h2>User Login</h2>
+        <form>
+            <input id="email" name="email" type="text">
+            <label for="email">email</label><br />
+            <input id="password" name="password" type="password">
+            <label for="password">password</label><br />
+            <input id="login" name="login" type="button" onclick="loginFunction()" value="Login">
+            <input id="register" name="register" type="button" onclick="registration()" value="New User">
+        </form>
+    </div>
+    <div id="footer-container">
+        <footer class="footer">
+            <h6>Devoplers: Brandon Perrien | Brian Gardner | Donald Farrar | Mark W Young</h6>
+        </footer>
+    </div>
+</body>
+
+</html>
