@@ -18,8 +18,6 @@
 
                     let tmpHtml = "<tr><th>Hotel Name</th><th>Start Date</th><th>End Date</th><th>Update Booking</th><th>Cancel Booking</th></tr>";
                     for (element of json) {
-                        console.log(element);
-                        
                         tmpHtml = tmpHtml.concat("<tr id=\"" + element.bookingId + "\"><td>" + element.name +
                             "</td><td>" + element.startDate.substring(0, 10) + "</td><td>" + element.endDate.substring(0, 10) + "</td>" +
                             "<td><a href=\"update_booking.html?userId=" + userId + "&bookingId=" + element.bookingId + 
@@ -41,7 +39,7 @@
                     method: 'DELETE'
                 });
 
-                getBookings();
+                await getBookings();
             }
 
             getBookings();

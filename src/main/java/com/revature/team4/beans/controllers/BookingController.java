@@ -105,10 +105,12 @@ public class BookingController {
         if(optionalUser.isPresent()) {
             User user = optionalUser.get();
             for (Booking b : user.getBookings()) {
-                user.removeBooking(b);
-                bookingRepo.delete(b);
-                userRepo.save(user);
-                break;
+                if(bookingId.equals(b.getBookingId())) {
+                    user.removeBooking(b);
+                    bookingRepo.delete(b);
+                    userRepo.save(user);
+                    break;
+                }
             }
         }
     }
