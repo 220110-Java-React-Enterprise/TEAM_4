@@ -9,7 +9,7 @@
 <body>
     <script type="text/javascript">
         async function createAdmin() {
-            let url = "http://localhost:8080/users/admin";
+            let url = "http://project2-env.eba-bsbc2m8b.us-east-1.elasticbeanstalk.com/users/admin";
 
             let response = await fetch(url, {
                 method: 'POST'
@@ -17,7 +17,7 @@
         }
 
         async function loginFunction() {
-            let goodUrl = "http://localhost:8080/users";
+            let goodUrl = "http://project2-env.eba-bsbc2m8b.us-east-1.elasticbeanstalk.com/users";
             let user = {
                 email: document.getElementById("email").value,
                 password: document.getElementById("password").value
