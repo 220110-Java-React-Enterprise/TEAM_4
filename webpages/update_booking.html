@@ -27,10 +27,8 @@
 
             try {
                 let json = await response.json();
-                console.log(json);
-                hotelId = json.hotelId;
-
-                hotel.hotelId = hotelId;
+                
+                hotel.hotelId = json.hotelId;
                 hotel.name = json.name;
                 hotel.starRating = json.starRating;
                 hotel.currentPrice = json.currentPrice;
@@ -62,7 +60,7 @@
 
             let bookingObj = {
                 bookingId: bookingId,
-                hotelId: hotelId,
+                hotelId: hotel.hotelId,
                 name: hotel.name,
                 starRating: hotel.starRating,
                 currentPrice: hotel.currentPrice,
