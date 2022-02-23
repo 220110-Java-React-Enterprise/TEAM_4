@@ -1,6 +1,9 @@
 package com.revature.team4.beans.apiResponseDAO.photos;
 
-//Class that holds the API response from a photo search with given hotel id
+/**
+ * Class that holds the API response from a photo search with given hotel id
+ * There is also a sub-class for image size data
+ */
 public class PhotosResponseDAO {
     private Long hotelId;
     private HotelImage[] hotelImages;
@@ -76,6 +79,9 @@ public class PhotosResponseDAO {
         }
     }
 
+    /**
+     * sub class that holds image size data
+     */
     public static class ImageSize {
         private Integer type;
         private Character suffix;

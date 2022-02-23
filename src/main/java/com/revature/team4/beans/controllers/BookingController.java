@@ -16,6 +16,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * handles requests/responses regarding hotel bookings
+ * contains POST, GET, UPDATE and DELETE methods
+ * sends commands to User and Booking repositories
+ */
 @RestController
 @RequestMapping("/users/{userId}/bookings")
 public class BookingController {
@@ -29,6 +34,16 @@ public class BookingController {
         this.userRepo = userRepo;
     }
 
+    /**
+     * @param booking
+     * @param userId
+     * @param startDate
+     * @param endDate
+     * @throws Exception
+     *
+     * takes in new booking object
+     * saves it to persistence
+     */
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void newBooking(@RequestBody Booking booking, @PathVariable Integer userId,
@@ -52,11 +67,20 @@ public class BookingController {
         }
     }
 
+    /**
+     *
+     * @return - a list of all bookings from every user
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/all")
     public List<Booking> getAllBookings() {
         return bookingRepo.findAll();
     }
 
+    /**
+     *
+     * @param userId
+     * @return - list of all bookings for user specified by userId
+     */
     @RequestMapping(method = RequestMethod.GET)
     public List<Booking> getAllBookingsForUser(@PathVariable Integer userId) {
         Optional<User> optionalUser = userRepo.findById(userId);
@@ -67,6 +91,12 @@ public class BookingController {
         }
     }
 
+    /**
+     *
+     * @param userId
+     * @param bookingId
+     * @return - booking specified by bookingId for user specified by userId
+     */
     @RequestMapping(value = "/{bookingId}")
     public Booking getBookingForUserById(@PathVariable Integer userId, @PathVariable Integer bookingId) {
         Optional<User> optionalUser = userRepo.findById(userId);
@@ -81,6 +111,15 @@ public class BookingController {
         return null;
     }
 
+    /**
+     *
+     * @param updateBooking
+     * @param bookingId
+     * @param startDate
+     * @param endDate
+     *
+     * saves user's changes to the dates of a specified booking
+     */
     @RequestMapping(value = "/{bookingId}", method = RequestMethod.PUT)
     public void updateBooking(@RequestBody Booking updateBooking, @PathVariable Integer bookingId,
                               @RequestParam("startDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date startDate,
@@ -93,6 +132,13 @@ public class BookingController {
         }
     }
 
+    /**
+     *
+     * @param userId
+     * @param bookingId
+     *
+     * deletes a booking from persistence
+     */
     @RequestMapping(value = "/{bookingId}", method = RequestMethod.DELETE)
     public void deleteBooking(@PathVariable Integer userId, @PathVariable Integer bookingId) {
         Optional<User> optionalUser = userRepo.findById(userId);

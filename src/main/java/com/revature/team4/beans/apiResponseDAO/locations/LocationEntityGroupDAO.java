@@ -2,6 +2,9 @@ package com.revature.team4.beans.apiResponseDAO.locations;
 
 import java.util.List;
 
+/**
+ * A lower-level model object of data taken from locations API
+ */
 public class LocationEntityGroupDAO {
 
     public String group;
