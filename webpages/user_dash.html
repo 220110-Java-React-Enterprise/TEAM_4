@@ -10,24 +10,25 @@
                 let params = (new URL(document.location)).searchParams;
                 let userId = params.get("userId");
 
-                document.getElementById("locationSearch").innerHTML =
-                    "<a href=\"location_search.html?userId=" + userId + "\">Location Search</a>";
+                document.getElementById("locationSearch").innerHTML = 
+                    "<a href=\"location_search.html?userId=" + userId + "\">Location Search</a>" 
+                    +  document.getElementById("locationSearch").innerHTML;
                 document.getElementById("userBookings").innerHTML =
-                    "<a href=\"user_bookings.html?userId=" + userId + "\">User Bookings</a>";
-                document.getElementById("accountManagement").innerHTML =
-                    "<a href=\"location_search.html?userId=" + userId + "\">Location Search</a>";
+                    "<a href=\"user_bookings.html?userId=" + userId + "\">User Bookings</a>" + document.getElementById("userBookings").innerHTML;
                 }
         </script>
-        <h1>Account Info:</h1>
-        <div id="locationSearch" >
-           <p> </p>
-        </div>
-        <div id="userBookings">
+        <header>
+            <h1>Account Info:</h1>
+        </header>
 
+        <div id="locationSearch" class="navigation">
+            <p>Choose from endless locations across the United States to book your next destination.</p>
         </div>
-        <div id="accountManagement">
-            
+        
+        <div id="userBookings" class="navigation">
+            <p>If you need to make any changes to your already booked hotels.</p>
         </div>
+
         <script>
             loadUserInfo();
         </script>

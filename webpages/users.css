@@ -1,12 +1,30 @@
 body {
-    background-image: url("paper.gif");
-  }
+    background-image: url("Spello_and_Flowers_in_Alleyway_Italy_ngi5pr.png");
+    background-size: cover;
+}
 
+h1 {
+  color: white;  
+  border-width: 10px, 10px, 10px, 10px;
+}
 div{
     margin: 30px;
+    font-size: 150%;
+}
+
+#locationSearch {
+    text-align: left;
+}
+
+#userBookings{
+    text-align: left;
 }
 
 
-#locationSearch {
-    
+.navigation{
+    width: 50%;
+    float: left;
+    padding: 20px;
+    border: 2px solid red;
+    background-color: white;
 }
