@@ -7,7 +7,7 @@
     <body>
         <script>
             async function getUserBookings() {
-                let url = "http://localhost:8080/users/";
+                let url = "http://project2-env.eba-bsbc2m8b.us-east-1.elasticbeanstalk.com/users/";
                 let currentUrl = window.location.href;
                 let params = (new URL(document.location)).searchParams;
                 let userId = params.get("userId");
@@ -29,7 +29,7 @@
                 }
             }
             async function cancelBooking(userId, bookingId) {
-                let url = "http://localhost:8080/users/" + userId + "/bookings/" + bookingId;
+                let url = "http://project2-env.eba-bsbc2m8b.us-east-1.elasticbeanstalk.com/users/" + userId + "/bookings/" + bookingId;
 
                 let response = await fetch(url, {
                     method: 'DELETE'

@@ -18,7 +18,7 @@
 
         async function searchHotels() {
 
-            let url = "http://localhost:8080/location_listings/";
+            let url = "http://project2-env.eba-bsbc2m8b.us-east-1.elasticbeanstalk.com/location_listings/";
             let currentUrl = window.location.href;
 
             let params = (new URL(document.location)).searchParams;
@@ -58,7 +58,7 @@
         async function bookHotel(clickedId, clickedName, clickedStarRating, clickedCurrentPrice, clickedExactCurrentPrice) {
             let params = (new URL(document.location)).searchParams;
             let userId = params.get("userId");
-            let url = "http://localhost:8080/users/" + userId + "/bookings";
+            let url = "http://project2-env.eba-bsbc2m8b.us-east-1.elasticbeanstalk.com/users/" + userId + "/bookings";
 
             let inputStartDate = document.getElementById("start").value;
             let inputEndDate = document.getElementById("end").value;

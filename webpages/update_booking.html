@@ -22,7 +22,7 @@
             let userId = params.get("userId");
             let bookingId = params.get("bookingId");
 
-            let requestUrl = "http://localhost:8080/users/" + userId + "/bookings/" + bookingId;
+            let requestUrl = "http://project2-env.eba-bsbc2m8b.us-east-1.elasticbeanstalk.com/users/" + userId + "/bookings/" + bookingId;
             console.log(requestUrl);
             let response = await fetch(requestUrl);
 
@@ -56,7 +56,7 @@
         async function updateBooking(userId, bookingId) {
             let startDate = document.getElementById("start").value;
             let endDate = document.getElementById("end").value;
-            let requestUrl = "http://localhost:8080/users/" + userId + "/bookings/" + bookingId +
+            let requestUrl = "http://project2-env.eba-bsbc2m8b.us-east-1.elasticbeanstalk.com/users/" + userId + "/bookings/" + bookingId +
                 "?startDate=" + startDate + "&endDate=" + endDate;
 
             let bookingObj = {

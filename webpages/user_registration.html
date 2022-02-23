@@ -9,7 +9,7 @@
 <body>
     <script type="text/javascript">
         async function postUser() {
-            let goodUrl = "http://project2-env.eba-bsbc2m8b.us-east-1.elasticbeanstalk.com/users";
+            let goodUrl = "project2-env.eba-bsbc2m8b.us-east-1.elasticbeanstalk.com/users";
             let user = {
                 email: document.getElementById("email").value,
                 password: document.getElementById("password").value
@@ -34,7 +34,7 @@
     <div class="block">
         <h1>Bed, Breakfast & Java</h1>
         <h2>User Registration</h2>
-        <form method="POST" action="http://localhost:8080/users">
+        <form method="POST" action="project2-env.eba-bsbc2m8b.us-east-1.elasticbeanstalk.com/users">
             <input id="email" name="email" type="text">
             <label for="email">email</label><br />
             <input id="password" name="password" type="password">
