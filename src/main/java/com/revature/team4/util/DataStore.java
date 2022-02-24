@@ -6,7 +6,9 @@ import com.revature.team4.beans.entities.User;
 
 import java.util.List;
 
-//Class to hold static members that can be accessed easily throughout the application
+/**
+ * Class to hold static members that can be accessed easily throughout the application
+ */
 public class DataStore {
     private static User currentUser;
     private static List<LocationEntityDAO> currentLocationResults;

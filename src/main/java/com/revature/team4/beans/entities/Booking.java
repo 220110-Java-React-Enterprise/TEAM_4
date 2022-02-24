@@ -4,6 +4,9 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
 
+/**
+ * Class holding booking information, such as id, hotel information, start date and end date
+ */
 @Entity
 public class Booking {
     @Id

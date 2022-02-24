@@ -6,6 +6,9 @@ import java.io.Writer;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Class that allows exceptions to be stored in separate log files
+ */
 public class ExceptionLogger {
     private static ExceptionLogger exceptionLogger;
     private static String filePath;

@@ -4,6 +4,9 @@ import javax.persistence.*;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Class holding user information, like user id, email, password, and whether user is admin
+ */
 @Entity
 public class User {
     @Id
