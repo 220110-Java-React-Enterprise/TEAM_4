@@ -14,11 +14,18 @@
                 let userId = params.get("userId");
 
                 document.getElementById("getAllBookings").innerHTML =
-                    "<a href=\"admin_all_bookings.html?adminId=" + userId + "\">See All Bookings</a>";
-                document.getElementById("getBookingsByUser").innerHTML =
-                    "<a href=\"admin_user_bookings.html?adminId=" + userId + "\">See All Bookings By User</a>";
+                    "<a href=\"admin_all_bookings.html?adminId=" + userId + "\">See All Bookings</a>" +
+                    document.getElementById("getAllBookings").innerHTML;
                 document.getElementById("getAllUsers").innerHTML =
-                    "<a href=\"admin_all_users.html?adminId=" + userId + "\">See All Users</a>";
+                    "<a href=\"admin_all_users.html?adminId=" + userId + "\">See All Users</a>" +
+                    document.getElementById("getAllUsers").innerHTML;
+
+                document.getElementById("locationSearch").innerHTML = 
+                    "<a href=\"location_search.html?userId=" + userId + "\">Location Search</a>" +
+                    document.getElementById("locationSearch").innerHTML;
+                document.getElementById("userBookings").innerHTML =
+                    "<a href=\"user_bookings.html?userId=" + userId + "\">User Bookings</a>" + 
+                    document.getElementById("userBookings").innerHTML;
             }
         </script>
         <div class="block">
@@ -27,10 +34,14 @@
             <div id="getAllBookings" class="block">
             
             </div>
-            <div id="getBookingsByUser" class="block">
+            <div id="getAllUsers" class="block">
     
             </div>
-            <div id="getAllUsers" class="block">
+            <h2>User Dashboard</h2>
+            <div id="locationSearch" class="block">
+
+            </div>
+            <div id="userBookings" class="block">
     
             </div>
         </div>

@@ -1,16 +1,55 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" href="base.css">
-        <title>Hotel Listing</title>
-    </head>
-    <body>
-        <h1 id="hotelName"></h1>
-        <div id="footer-container">
-            <footer class="footer">
-                <h6>Developers: Brandon Perrien | Brian Gardner | Donald Farrar | Mark W Young</h6>
-            </footer>
-        </div>
-    </body>
+
+<head>
+    <link rel="stylesheet" href="base.css">
+    <title>Hotel Listing</title>
+</head>
+
+<body>
+    <script>
+        async function loadPhotos() {
+            let currentUrl = window.location.href;
+            let params = (new URL(document.location)).searchParams;
+            let userId = params.get("userId");
+            let hotelId = params.get("hotelId");
+            let hotelName = params.get("hotelName");
+
+            let requestUrl = "http://localhost:8080/location_listings/photostring/" + hotelId + "/z";
+            console.log(requestUrl);
+            let response = await fetch(requestUrl);
+
+            try {
+                let json = await response.json();
+
+                document.getElementById("hotelName").innerHTML = hotelName;
+
+                let counter = 0;
+                for (element of json) {
+                    if (counter >= 20) break;
+                    console.log(element);
+                    document.getElementById("photos").innerHTML =
+                        document.getElementById("photos").innerHTML + 
+                        "<img src=\"" + element + "\"/>";
+                    counter++;
+                }
+            } catch (error) {
+                alert("Error: could not load booking");
+            }
+        }
+
+        loadPhotos();
+
+    </script>
+    <div class="block">
+        <div id="hotelName"></div>
+        <div id="photos"></div>
+    </div>
+    <div id="footer-container">
+        <footer class="footer">
+            <h6>Developers: Brandon Perrien | Brian Gardner | Donald Farrar | Mark W Young</h6>
+        </footer>
+    </div>
+</body>
 
 </html>

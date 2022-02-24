@@ -15,6 +15,7 @@ import com.squareup.okhttp.Request;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -74,7 +75,7 @@ public class FindListingsController {
 
     /**
      *
-     * @param query
+     * @param query the hotel id to find photos for
      * @return - hotel photo object
      *
      */
@@ -103,7 +104,7 @@ public class FindListingsController {
             Response response = client.newCall(request).execute();
             String jsonString = response.body().string();
 
-            //Map the json to the photo respose DAO
+            //Map the json to the photo response DAO
             ObjectMapper mapper = new ObjectMapper();
             mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             PhotosResponseDAO photosResponseDAO = mapper.readValue(jsonString, PhotosResponseDAO.class);
@@ -114,5 +115,30 @@ public class FindListingsController {
         }
 
         return null;
+    }
+
+    /**
+     * @param query the hotel id to find photos for
+     * @param size the suffix to determine image size
+     * @return list of URL strings that link to photos
+     */
+    @RequestMapping(method = RequestMethod.GET, value="/photostring/{query}/{size}")
+    public List<String> findPhotoStrings(@PathVariable String query, @PathVariable String size) {
+        //Get a PhotosResponseDAO using findPhotos
+        PhotosResponseDAO photosResponseDAO = findPhotos(query);
+
+        //Extract the array of HotelImage objects within photosResponseDAO
+        PhotosResponseDAO.HotelImage[] hotelImages = photosResponseDAO.getHotelImages();
+
+        //Create a list of strings holding the urls of all photos
+        List<String> photoStrings = new ArrayList<>();
+
+        //Iterate through hotelImages and add the URL with suffix to list of strings
+        for (int index = 0; index < hotelImages.length; index++) {
+            photoStrings.add(hotelImages[index].getURLWithSuffix(size));
+        }
+
+        //Return the list of strings
+        return photoStrings;
     }
 }

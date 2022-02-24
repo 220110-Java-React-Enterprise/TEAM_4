@@ -34,7 +34,7 @@
                 for (element of text) {
                     console.log(element);
                     let tmpUrl = "hotel_listing.html?userId=" + userId +
-                        "&hotelId=" + element.id;
+                        "&hotelId=" + element.id + "&hotelName=" + element.name;
 
                     document.getElementById("resultsTable").innerHTML =
                         document.getElementById("resultsTable").innerHTML.concat(

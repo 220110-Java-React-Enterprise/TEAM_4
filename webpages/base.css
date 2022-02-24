@@ -14,4 +14,8 @@ div.block {
     padding: 3px;
     background-color: DarkSalmon;
     color: black;
-  }
+}
+
+td {
+    padding: 4px;
+}
