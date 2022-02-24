@@ -46,13 +46,13 @@ public class UserController {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/all")
     public List<User> getAllUsers(){
-    return userRepo.findAll();
+        return userRepo.findAll();
     }
 
     /**
      * Mapped to controller's GET method for /{userId} path
      *
-     * @param userId
+     * @param userId id used to find user
      * @return - specific user by id
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{userId}")
@@ -69,8 +69,8 @@ public class UserController {
      * Checks if a user exists in a database with matching email and password
      * Mapped to the controller's GET method
      *
-     * @param email
-     * @param password
+     * @param email email to check against database
+     * @param password password to check against database
      * @return - if email and password match/found: user object
      *         - not found: null
      */
@@ -100,7 +100,7 @@ public class UserController {
      * attempt storing a given User object in appropriate table
      * Mapped to the controller's POST method
      *
-     * @param user
+     * @param user user object to be updated
      * @return - return the User object
      */
     @RequestMapping(method = RequestMethod.POST)
@@ -115,13 +115,19 @@ public class UserController {
         }
     }
 
-    //Method to attempt updating a given User object in appropriate table
-    //Mapped to the controller's PUT method
+    /**
+     * Method to attempt updating a given User object in appropriate table
+     * Mapped to the controller's PUT method
+     * @param user user to update in the table
+     */
     @RequestMapping(method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void updateUser(@RequestBody User user) { userRepo.save(user); }
 
-    //Method to attempt deletion of a given User object in appropriate table
+    /**
+     * Method to attempt deletion of a given User object in appropriate table
+     * @param user user to delete from the table
+     */
     @RequestMapping(method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.OK)
     public void deleteUser(@RequestBody User user) {
@@ -132,7 +138,11 @@ public class UserController {
         userRepo.delete(user);
     }
 
-    //Method to check if an email is already being used in database and return User if so
+    /**
+     * Method to check if an email is already being used in database and return User if so
+     * @param email email string to check if already being used in database
+     * @return user object using email or null if not found
+     */
     public User getUserByEmail(String email) {
         //Get all users in database
         List<User> users = userRepo.findAll();
@@ -147,8 +157,10 @@ public class UserController {
         return null;
     }
 
-    //Method to automatically generate admin account every time the application starts if it does not exist
-    //Mapped to controller's POST method with /admin path
+    /**
+     * Method to automatically generate admin account every time the application starts if it does not exist
+     * Mapped to controller's POST method with /admin path
+     */
     @RequestMapping(method = RequestMethod.POST, value="/admin")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void createAdmin() {
@@ -173,8 +185,12 @@ public class UserController {
         }
     }
 
-    //Method to check if a given user is an admin
-    //Mapped to controller's GET method with /admin/{userId} path
+    /**
+     * Method to check if a given user is an admin
+     * Mapped to controller's GET method with /admin/{userId} path
+     * @param userId userId to check if admin
+     * @return boolean indicating whether the given user is an admin account
+     */
     @RequestMapping(method = RequestMethod.GET, value="/admin/{userId}")
     public Boolean isAdmin(@PathVariable Integer userId) {
         //Attempt to load user from database
